@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor1"
+    tools:context=".activity.FullScreenEvent">
+
+
+
+<!--    <androidx.core.widget.NestedScrollView-->
+<!--        android:id="@+id/mainview"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_marginBottom="0dp"-->
+<!--        android:orientation="vertical"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:scrollbarSize="0dp">-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/backbtn"
+                android:layout_width="50sp"
+                android:layout_height="35sp"
+                android:src="@drawable/back_btn"
+                app:layout_constraintBottom_toBottomOf="@+id/cardView3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/cardView3" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10sp"
+                android:layout_marginEnd="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/registerbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="25sp"
+                    android:paddingVertical="10sp"
+                    android:background="@color/blue"
+                    android:text="Register"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+            </androidx.cardview.widget.CardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/image_cardview"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:cardElevation="0dp"
+                android:layout_marginTop="10sp"
+                app:strokeColor="@color/blue"
+                app:strokeWidth="2sp"
+                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView3">
+
+                <ImageView
+                    android:id="@+id/event_imageholder"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/event_image"
+                    android:layout_margin="2sp"
+                    android:elevation="10sp"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20sp"
+                android:layout_marginBottom="-10sp"
+                app:cardElevation="10sp"
+                app:cardCornerRadius="20sp"
+                android:layout_marginTop="-60sp"
+                app:layout_constraintTop_toBottomOf="@id/image_cardview">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/event_titleholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10sp"
+                        android:text="Title: This Area Contains Title for specific event"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/event_dateholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20sp"
+                        android:text="Start Date : 2022-05-04 | End Date : 2022-05-07" />
+
+                    <TextView
+                        android:id="@+id/event_descholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20sp"
+                        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                        android:textSize="18sp" />
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="500sp"
+                        app:layout_constraintTop_toBottomOf="@+id/event_descholder"/>
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+
+
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="50sp"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/event_descholder"/>-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--    </androidx.core.widget.NestedScrollView>-->
+
+</ScrollView>
