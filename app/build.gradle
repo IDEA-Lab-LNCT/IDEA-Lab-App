@@ -1,7 +1,10 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id("kotlin-kapt") // Annotation processor
 }
+// Plugin for direct view binding in kotlin (no need for findViewById())
+apply plugin: 'kotlin-android-extensions'
 
 
 
