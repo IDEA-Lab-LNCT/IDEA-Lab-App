@@ -67,12 +67,13 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
         ViewHolder2 holder = (ViewHolder2) hold;
 
         if(event_list.size() > 0) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    c.startActivity(new Intent(c, FullScreenEvent.class));
-                }
-            });
+            //        TODO uncomment following lines ofr click on event
+//            holder.itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    c.startActivity(new Intent(c, FullScreenEvent.class));
+//                }
+//            });
 
             //TODO set image in image view and uncomment these lines
             holder.event_date.setText(event_list.get(position).getStart_date());
