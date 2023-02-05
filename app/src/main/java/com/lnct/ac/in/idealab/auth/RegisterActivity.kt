@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.NetworkResponse
 import com.android.volley.VolleyError
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.lnct.ac.`in`.idealab.Constants
 import com.lnct.ac.`in`.idealab.Models.User
 import com.lnct.ac.`in`.idealab.R
@@ -21,15 +23,14 @@ import org.json.JSONObject
 import java.util.*
 import kotlin.collections.ArrayList
 
-class RegisterActivity : AppCompatActivity() , login_finish {
-    lateinit var userName : TextInputEditText
-    lateinit var userEmail : TextInputEditText
-    lateinit var userPhone : TextInputEditText
-    lateinit var collegeDropDown : AutoCompleteTextView
-    lateinit var branchDropDown : AutoCompleteTextView
-    lateinit var loading : LinearLayout
-    var RES_CODE = -1
-
+class RegisterActivity : AppCompatActivity(){
+    private val db = Firebase.firestore
+    private lateinit var userName : TextInputEditText
+    private lateinit var userEmail : TextInputEditText
+    private lateinit var userPhone : TextInputEditText
+    private lateinit var collegeDropDown : AutoCompleteTextView
+    private lateinit var branchDropDown : AutoCompleteTextView
+    private lateinit var loading : LinearLayout
     val TAG = "RegisterActivity"
     var enableBtn = false
 
@@ -39,6 +40,7 @@ class RegisterActivity : AppCompatActivity() , login_finish {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        val phone = intent.getStringExtra("PHONE")
 
         collegeDropDown = findViewById(R.id.college_dropdown_menu)
         branchDropDown = findViewById(R.id.branch_dropdown_menu)
@@ -46,11 +48,6 @@ class RegisterActivity : AppCompatActivity() , login_finish {
         userEmail = findViewById(R.id.evEmail)
         userPhone = findViewById(R.id.evPhNo)
         loading = findViewById(R.id.loading)
-
-        val user_email = intent.getStringExtra("EMAIL")
-        userEmail.setText(user_email)
-        userEmail.isEnabled = false
-
 
 
         val collegeList = listOf("LNCT", "LNCTE", "LNCTS", "LNCTU","Other")
@@ -77,48 +74,26 @@ class RegisterActivity : AppCompatActivity() , login_finish {
                 Log.d(TAG,name + " "+email + " "+branch + " "+college + " "+phone + " ")
 
                 if(enableBtn){
+                    val user = hashMapOf(
+                        "name" to name,
+                        "email" to email,
+                        "branch" to branch,
+                        "college" to college,
+                        "whatsapp" to phone
+                    )
 
-                    val request = VolleyRequest(this@RegisterActivity, object : CallBack {
-                        override fun responseCallback(response: JSONObject) {
-                            val success = response.get("sucess") as JSONObject
-                            val userCreated = success.get("user") as JSONObject
-
-                            Utils.saveUser(this@RegisterActivity,Utils.convertToUserObj(userCreated))
-
-                            val intent = Intent(this@RegisterActivity, HomeActivity::class.java)
-                            startActivity(intent)
-                            finish()
+                    db.collection("users").document(phone)
+                        .set(user)
+                        .addOnSuccessListener {
+                            Toast.makeText(this@RegisterActivity, "Registration Complete 👍", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this@RegisterActivity,HomeActivity::class.java))
+                            finishAffinity()
                         }
-
-                        override fun errorCallback(error_message: VolleyError?) {
-                            loading.visibility = View.GONE
-                            Toast.makeText(this@RegisterActivity, "Try again after sometime!", Toast.LENGTH_LONG).show()
-                        }
-
-                        override fun responseStatus(response_code: NetworkResponse?) {
-                            if (response_code != null) {
-                                RES_CODE = response_code.statusCode
-                            }
-                            Log.d(TAG,"RESPONCE_CODE : "+response_code)
-                        }
-                    })
-
-                    val bodyData = JSONObject()
-                    bodyData.put("email",email)
-                    bodyData.put("name",name)
-                    bodyData.put("phone",phone)
-                    bodyData.put("college",college)
-                    bodyData.put("branch",branch)
-
-
-
-                    Log.d(TAG, Constants.URL_CREATE_USER)
-                    request.postWithBody(Constants.URL_CREATE_USER,bodyData)
-
-                    if(Utils.isNetworkAvailable(this@RegisterActivity)){
-                        loading.visibility = View.VISIBLE
-                    }
-
+                        .addOnFailureListener {
+                                e -> Log.w(TAG, "Server Error", e)
+                            Toast.makeText(this@RegisterActivity, "Server Error", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this@RegisterActivity,LoginActivity::class.java))
+                            finishAffinity()}
 
 
                 }else {
@@ -128,8 +103,4 @@ class RegisterActivity : AppCompatActivity() , login_finish {
         })
     }
 
-    override fun finishLogin() {
-        finish()
-        finishAffinity()
-    }
 }

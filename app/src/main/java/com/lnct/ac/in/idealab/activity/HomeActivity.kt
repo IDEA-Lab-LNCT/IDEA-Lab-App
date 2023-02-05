@@ -14,9 +14,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 import com.lnct.ac.`in`.idealab.R
+import com.lnct.ac.`in`.idealab.auth.LoginActivity
 import com.lnct.ac.`in`.idealab.frgments.*
 import com.lnct.ac.`in`.idealab.quiz.QuizWelcomeFragment
+import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
 
@@ -39,6 +43,12 @@ class HomeActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.tool_bar)
         linkeden_link = findViewById(R.id.linkedin_link)
         instagram_link = findViewById(R.id.instagram_link)
+
+        button_logout.setOnClickListener{
+            FirebaseAuth.getInstance().signOut()
+            startActivity(Intent(this,LoginActivity::class.java))
+            finishAffinity()
+        }
 
        setSupportActionBar(toolbar)
 
