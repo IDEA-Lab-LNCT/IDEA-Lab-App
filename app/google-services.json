@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "249306643904",
+    "project_id": "idea-lab-app",
+    "storage_bucket": "idea-lab-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:249306643904:android:dcf45d6cdab026a3afdc25",
+        "android_client_info": {
+          "package_name": "com.lnct.ac.in.idealab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "249306643904-1cnrbt9bst9358e834ceqj17io5q8tph.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlvOUb85ydB2BmGhKAqvbj4aETqMIgUIY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "249306643904-1cnrbt9bst9358e834ceqj17io5q8tph.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

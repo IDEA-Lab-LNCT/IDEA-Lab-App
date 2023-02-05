@@ -55,6 +55,13 @@
                     android:src="@drawable/instagram"
                     android:layout_marginHorizontal="10sp"/>
 
+                <ImageView
+                    android:id="@+id/button_logout"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:src="@drawable/logout"
+                    android:layout_marginHorizontal="10sp"/>
+
             </LinearLayout>
 
             <TextView

@@ -8,31 +8,35 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.lnct.ac.`in`.idealab.auth.StartActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.lnct.ac.`in`.idealab.R
 import com.lnct.ac.`in`.idealab.Utils
 import com.lnct.ac.`in`.idealab.auth.LoginActivity
 
 class SplashScreen : AppCompatActivity() {
-    lateinit var logoImg : ImageView
-    lateinit var tv2: TextView
-    lateinit var  icon_holder: LinearLayout
+    private lateinit var auth: FirebaseAuth;
+    private lateinit var logoImg : ImageView
+    private lateinit var tv2: TextView
+    private lateinit var  icon_holder: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
+
+        auth = Firebase.auth
 
         logoImg = findViewById(R.id.launch_image)
         tv2 = findViewById(R.id.tv2)
         icon_holder = findViewById(R.id.icon_holder)
 
         Handler().postDelayed({
-            if(Utils.getPrefs(this).getString("USER","").equals("")){
+            if(auth.currentUser == null){
                 finish()
                 startActivity(Intent(this@SplashScreen, LoginActivity::class.java))
             }
             else {
-
                 finish()
                 startActivity(Intent(this@SplashScreen, HomeActivity::class.java))}
 
