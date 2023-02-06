@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bgColor1"
-    tools:context=".frgments.ContactUs">
+    tools:context="com.lnct.bhopal.ac.in.idealab.frgments.ContactUs">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

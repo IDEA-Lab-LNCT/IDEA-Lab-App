@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#D67F6B"
-    tools:context=".quiz.RightActivity">
+    tools:context="com.lnct.bhopal.ac.in.idealab.quiz.RightActivity">
 
     <ImageView
         android:id="@+id/imageView3"

@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:249306643904:android:dcf45d6cdab026a3afdc25",
+        "mobilesdk_app_id": "1:249306643904:android:3a3007d8c3bfb13bafdc25",
         "android_client_info": {
-          "package_name": "com.lnct.ac.in.idealab"
+          "package_name": "com.lnct.bhopal.ac.in.idealab"
         }
       },
       "oauth_client": [

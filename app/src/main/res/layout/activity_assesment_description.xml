@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/bgColor"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".quiz.AssesmentDescriptionActivity">
+    tools:context="com.lnct.bhopal.ac.in.idealab.quiz.AssesmentDescriptionActivity">
 
     <!--    D67F6B-->
 

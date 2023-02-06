@@ -13,7 +13,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.lnct.ac.in.idealab"
+        applicationId "com.lnct.bhopal.ac.in.idealab"
         minSdk 26
         targetSdk 32
         versionCode 1
@@ -61,5 +61,7 @@ dependencies {
 
     implementation 'com.github.Mindinventory:AutoScrollCircularPagerView:0.0.2'
 
+
+    implementation 'com.google.code.gson:gson:2.10.1'
 
 }
