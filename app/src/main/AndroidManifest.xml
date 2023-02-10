@@ -80,6 +80,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="com.jesusd0897.gallerydroid.view.activity.PictureDetailActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

@@ -187,21 +187,21 @@ public class HomeFragment extends Fragment {
 //        autoScrollContainer.setItems(image_list, true);
 
         gallery_list = new ArrayList<>();
-        gallery_list.add("android.resource://com.lnct.ac.in.idealab/drawable/h1");
-        gallery_list.add("android.resource://com.lnct.ac.in.idealab/drawable/h2");
-        gallery_list.add("android.resource://com.lnct.ac.in.idealab/drawable/h3");
-        gallery_list.add("android.resource://com.lnct.ac.in.idealab/drawable/h4");
-        gallery_list.add("android.resource://com.lnct.ac.in.idealab/drawable/h5");
-        gallery_list.add("android.resource://com.lnct.ac.in.idealab/drawable/h6");
-        gallery_list.add("android.resource://com.lnct.ac.in.idealab/drawable/h7");
-        gallery_list.add("android.resource://com.lnct.ac.in.idealab/drawable/h8");
-        gallery_list.add("android.resource://com.lnct.ac.in.idealab/drawable/h9");
-        gallery_list.add("android.resource://com.lnct.ac.in.idealab/drawable/h10");
-        gallery_list.add("android.resource://com.lnct.ac.in.idealab/drawable/h11");
-        gallery_list.add("android.resource://com.lnct.ac.in.idealab/drawable/h12");
-        gallery_list.add("android.resource://com.lnct.ac.in.idealab/drawable/h13");
-        gallery_list.add("android.resource://com.lnct.ac.in.idealab/drawable/h14");
-        gallery_list.add("android.resource://com.lnct.ac.in.idealab/drawable/h15");
+        gallery_list.add("android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h1");
+        gallery_list.add("android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h2");
+        gallery_list.add("android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h3");
+        gallery_list.add("android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h4");
+        gallery_list.add("android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h5");
+        gallery_list.add("android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h6");
+        gallery_list.add("android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h7");
+        gallery_list.add("android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h8");
+        gallery_list.add("android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h9");
+        gallery_list.add("android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h10");
+        gallery_list.add("android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h11");
+        gallery_list.add("android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h12");
+        gallery_list.add("android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h13");
+        gallery_list.add("android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h14");
+        gallery_list.add("android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h15");
 
 //        TODO add url array list to adapter's constructor
         gallery_adapter = new HomeGalleryAdapter(getContext(), gallery_list);
@@ -213,7 +213,7 @@ public class HomeFragment extends Fragment {
 
 
         ArrayList<EventModel> list_event = new ArrayList<>();
-        list_event.add(new EventModel("001", "https://instagram.fdel36-1.fna.fbcdn.net/v/t51.2885-15/323819003_553057826731316_4065689184604012230_n.webp?stp=dst-jpg_e35_p480x480&_nc_ht=instagram.fdel36-1.fna.fbcdn.net&_nc_cat=108&_nc_ohc=qYb_7XnbZaAAX_wB6h0&edm=ACWDqb8BAAAA&ccb=7-5&ig_cache_key=MzAwODA5MTIzMTg3MDg2MTcyNw%3D%3D.2-ccb7-5&oh=00_AfA7tUyMpG1mqRRb4u8ztjXqzdGHhs4gLYX0lJqMNOwxIQ&oe=63DF53FB&_nc_sid=1527a3", "IDEA Lab internship", "14-01-2023", "Internship oppurtnity at IDEA Lab LNCT, with stipend of 5000rs.", "----------", false, new JSONArray()));
+        list_event.add(new EventModel("001", "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/intern", "IDEA Lab internship", "14-01-2023", "Internship oppurtnity at IDEA Lab LNCT, with stipend of 5000rs.", "----------", false, new JSONArray()));
         event_adapter = new HomeUpcomingEventAdapter(list_event, getContext());
         event_view = view.findViewById(R.id.upcoming_events_view);
         event_view.setLayoutManager(event_manager);
@@ -408,46 +408,7 @@ public class HomeFragment extends Fragment {
         }).start();
     }
 
-    private void fetchAndLoadEvents() {
-        VolleyRequest request = new VolleyRequest(getContext(), new CallBack() {
-            @Override
-            public void responseCallback(JSONObject response) {
-                Log.i("-----on res home frag-----", response.toString());
-                try {
-                    JSONArray sucess = response.getJSONArray("success");
-                    ArrayList<EventModel> tmp_list = new ArrayList<>();
-                    for(int i=0; i<sucess.length(); i++) {
-                        EventModel model = EventModel.objToEventModel(sucess.getJSONObject(i));
-                        tmp_list.add(model);
-                        if(!model.isPast_event()) {
-                            upcoming_event_list.add(model);
-                        }
-                    }
-                    Log.i("length_arraylistt", upcoming_event_list.size()+"");
-                    if(dialog != null && dialog.isShowing()) dialog.dismiss();
-                    event_adapter.updateView(upcoming_event_list);
-//                    event_adapter = new HomeUpcomingEventAdapter(upcoming_event_list, getContext());
-//                    event_view.setAdapter(event_adapter);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
 
-            @Override
-            public void errorCallback(VolleyError error_message) {
-                Log.i("-----error home frag-----", error_message.getMessage());
-                if(dialog != null && dialog.isShowing()) dialog.dismiss();
-            }
-
-            @Override
-            public void responseStatus(NetworkResponse response_code) {
-                Log.i("-----response status home frag-----", response_code.statusCode+"");
-            }
-        });
-
-        request.getRequest(Constants.URL_EVENTS);
-
-    }
 
 }
 
