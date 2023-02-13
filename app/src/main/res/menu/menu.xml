@@ -4,31 +4,31 @@
     <item
         android:title="Home"
         android:icon="@drawable/home"
-        android:id="@+id/home" />
+        android:id="@+id/homeFragment" />
     <item
         android:title="Event"
         android:icon="@drawable/placard"
-        android:id="@+id/event" />
+        android:id="@+id/event2" />
 
     <item
         android:title="Projects"
         android:icon="@drawable/project"
-        android:id="@+id/projects" />
+        android:id="@+id/projectFragment" />
     <item
         android:title="Highlights"
         android:icon="@drawable/shining"
-        android:id="@+id/highlights" />
+        android:id="@+id/highlightsFragment" />
 
 
         <item
             android:title="About"
             android:icon="@drawable/information"
-            android:id="@+id/about" />
+            android:id="@+id/aboutUs" />
 
         <item
             android:title="Contact"
             android:icon="@drawable/contact"
-            android:id="@+id/contact" />
+            android:id="@+id/contactUs" />
 
     </group>
 

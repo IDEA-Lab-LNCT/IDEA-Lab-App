@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -124,14 +125,7 @@ public class ProjectFragment extends Fragment {
         refresh_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment currentFragment = getActivity().getSupportFragmentManager().findFragmentById(R.id.container);
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    fragmentManager.beginTransaction().detach(currentFragment).commitNow();
-                    fragmentManager.beginTransaction().attach(currentFragment).commitNow();
-                } else {
-                    fragmentManager.beginTransaction().detach(currentFragment).attach(currentFragment).commit();
-                }
+                Navigation.findNavController(view).navigate(R.id.homeFragment);
             }
         });
 

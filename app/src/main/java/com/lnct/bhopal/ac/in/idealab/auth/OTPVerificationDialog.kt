@@ -15,6 +15,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 import com.lnct.bhopal.ac.`in`.idealab.R
@@ -81,11 +82,19 @@ class OTPVerificationDialog(context : Context,var userPhone : String,var verific
 
         verifyBtn.setOnClickListener{
             val otpCode = otpET1.text.toString()+otpET2.text.toString()+otpET3.text.toString()+otpET4.text.toString()+otpET5.text.toString()+otpET6.text.toString()
-            Log.d("OTP",otpCode)
-            if(verificationId != null){
-                val credential = PhoneAuthProvider.getCredential(verificationId!!, otpCode)
-                signInWithPhoneAuthCredential(credential)
+            if(otpCode.length == 6){
+                Log.d("OTP",otpCode)
+                if(verificationId != null){
+                    verifyBtn.isEnabled = false
+                    this.dismiss()
+                    val credential = PhoneAuthProvider.getCredential(verificationId!!, otpCode)
+                    signInWithPhoneAuthCredential(credential)
+                }
+            }else {
+                verifyBtn.isEnabled = true
+                Toast.makeText(context, "Enter complete 6-digit OTP", Toast.LENGTH_SHORT).show()
             }
+
 
         }
 

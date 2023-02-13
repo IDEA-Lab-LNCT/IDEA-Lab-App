@@ -27,6 +27,7 @@ class LoginActivity : AppCompatActivity(){
     private val TAG = "LoginActivity"
     private lateinit var otpVerificationDialog : OTPVerificationDialog
     private lateinit var phoneNumber : String
+    private var varificationID : String = ""
 
 
 
@@ -47,6 +48,7 @@ class LoginActivity : AppCompatActivity(){
                 //     detect the incoming verification SMS and perform verification without
                 //     user action.
                 Log.d(TAG, "onVerificationCompleted:$credential")
+                otpVerificationDialog.dismiss()
                 signInWithPhoneAuthCredential(credential)
             }
 
@@ -72,7 +74,10 @@ class LoginActivity : AppCompatActivity(){
             ) {
                 Log.d(TAG, "onCodeSent:$verificationId")
 
-                val otpVerificationDialog : OTPVerificationDialog = OTPVerificationDialog(this@LoginActivity,phoneNumber,verificationId, ::signInWithPhoneAuthCredential)
+                varificationID = verificationId
+                btnLogin.isEnabled = false
+
+                otpVerificationDialog = OTPVerificationDialog(this@LoginActivity,phoneNumber,verificationId, ::signInWithPhoneAuthCredential)
                 otpVerificationDialog.setCancelable(false)
                 otpVerificationDialog.show()
 
@@ -132,6 +137,7 @@ class LoginActivity : AppCompatActivity(){
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
+                    Toast.makeText(this, "Please wait...", Toast.LENGTH_SHORT).show()
                     db.collection("users").document(phoneNumber).get().addOnCompleteListener(this)  { task ->
                         if (task.isSuccessful) {
                             val u = task.result.get("name")
@@ -173,6 +179,9 @@ class LoginActivity : AppCompatActivity(){
                     loading.visibility = View.GONE
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
+                        otpVerificationDialog = OTPVerificationDialog(this@LoginActivity,phoneNumber,varificationID, ::signInWithPhoneAuthCredential)
+                        otpVerificationDialog.setCancelable(false)
+                        otpVerificationDialog.show()
                         Toast.makeText(this, "Invalid OTP", Toast.LENGTH_SHORT).show()
                     }
                     // Update UI
