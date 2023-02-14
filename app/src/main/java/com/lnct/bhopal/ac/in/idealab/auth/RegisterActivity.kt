@@ -2,6 +2,8 @@ package com.lnct.bhopal.ac.`in`.idealab.auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -14,6 +16,7 @@ import com.lnct.bhopal.ac.`in`.idealab.R
 import com.lnct.bhopal.ac.`in`.idealab.Utils
 import com.lnct.bhopal.ac.`in`.idealab.activity.HomeActivity
 import kotlinx.android.synthetic.main.activity_register.*
+import java.util.*
 
 class RegisterActivity : AppCompatActivity(){
     private val db = Firebase.firestore
@@ -41,6 +44,8 @@ class RegisterActivity : AppCompatActivity(){
         userPhone = findViewById(R.id.evPhNo)
         loading = findViewById(R.id.loading)
 
+        evDOB.addTextChangedListener(tw)
+
 
         val collegeList = listOf("LNCT", "LNCTE", "LNCTS", "LNCTU","Other")
         val collegeDropDownAdapter = ArrayAdapter(this, R.layout.drop_down_list_item, collegeList)
@@ -59,11 +64,22 @@ class RegisterActivity : AppCompatActivity(){
                 val branch = branchDropDown.text.toString().trim()
                 val college = collegeDropDown.text.toString().trim()
                 val phone = userPhone.text.toString().trim()
+                val dob = evDOB.text.toString().trim()
+                val enrollment = evEnrollment.text.toString().trim()
+                val address = evAddress.text.toString().trim()
 
-                if(name.length != 0 && email.length != 0 && branch.length != 0 && college.length != 0 && phone.length == 10)
+
+                if(name.length != 0
+                    && email.length != 0
+                    && branch.length != 0
+                    && college.length != 0
+                    && phone.length == 10
+                    && dob.length != 0
+                    && enrollment.length != 0
+                    && address.length != 0)
                     enableBtn = true
 
-                Log.d(TAG,name + " "+email + " "+branch + " "+college + " "+phone + " ")
+                Log.d(TAG,name + " "+email + " "+branch + " "+college + " "+phone + " "+dob+" "+enrollment+" "+address)
 
                 if(enableBtn){
                     val user = hashMapOf(
@@ -71,7 +87,10 @@ class RegisterActivity : AppCompatActivity(){
                         "email" to email,
                         "branch" to branch,
                         "college" to college,
-                        "whatsapp" to phone
+                        "whatsapp" to phone,
+                        "dob" to dob,
+                        "enrollment" to enrollment,
+                        "address" to address
                     )
                     loading.visibility = View.VISIBLE
                     btnRegister.isEnabled = false
@@ -80,7 +99,7 @@ class RegisterActivity : AppCompatActivity(){
                         .set(user)
                         .addOnSuccessListener {
                             loading.visibility = View.GONE
-                            val userObj = User(name,email,branch,college,phone,intent.getStringExtra("PHONE")!!)
+                            val userObj = User(name,email,branch,college,phone,intent.getStringExtra("PHONE")!!,dob,enrollment,address)
                             Utils.saveUser(this@RegisterActivity,userObj)
 
                             Toast.makeText(this@RegisterActivity, "Registration Complete 👍", Toast.LENGTH_SHORT).show()
@@ -103,6 +122,60 @@ class RegisterActivity : AppCompatActivity(){
                 }
             }
         })
+    }
+
+
+    var tw: TextWatcher = object : TextWatcher {
+        private var current = ""
+        private val ddmmyyyy = "DDMMYYYY"
+        private val cal: Calendar = Calendar.getInstance()
+
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+            if (s.toString() != current) {
+                var clean = s.toString().replace("[^\\d.]|\\.".toRegex(), "")
+                val cleanC = current.replace("[^\\d.]|\\.".toRegex(), "")
+                val cl = clean.length
+                var sel = cl
+                var i = 2
+                while (i <= cl && i < 6) {
+                    sel++
+                    i += 2
+                }
+                //Fix for pressing delete next to a forward slash
+                if (clean == cleanC) sel--
+                if (clean.length < 8) {
+                    clean = clean + ddmmyyyy.substring(clean.length)
+                } else {
+                    //This part makes sure that when we finish entering numbers
+                    //the date is correct, fixing it otherwise
+                    var day = clean.substring(0, 2).toInt()
+                    var mon = clean.substring(2, 4).toInt()
+                    var year = clean.substring(4, 8).toInt()
+                    mon = if (mon < 1) 1 else if (mon > 12) 12 else mon
+                    cal.set(Calendar.MONTH, mon - 1)
+                    year = if (year < 1900) 1900 else if (year > 2100) 2100 else year
+                    cal.set(Calendar.YEAR, year)
+                    // ^ first set year for the line below to work correctly
+                    //with leap years - otherwise, date e.g. 29/02/2012
+                    //would be automatically corrected to 28/02/2012
+                    day =
+                        if (day > cal.getActualMaximum(Calendar.DATE)) cal.getActualMaximum(Calendar.DATE) else day
+                    clean = String.format("%02d%02d%02d", day, mon, year)
+                }
+                clean = String.format(
+                    "%s/%s/%s", clean.substring(0, 2),
+                    clean.substring(2, 4),
+                    clean.substring(4, 8)
+                )
+                sel = if (sel < 0) 0 else sel
+                current = clean
+                evDOB.setText(current)
+                evDOB.setSelection(if (sel < current.length) sel else current.length)
+            }
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun afterTextChanged(s: Editable?) {}
     }
 
 }

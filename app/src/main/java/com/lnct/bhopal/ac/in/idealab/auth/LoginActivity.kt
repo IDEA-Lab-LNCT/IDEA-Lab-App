@@ -155,10 +155,13 @@ class LoginActivity : AppCompatActivity(){
                                 val uBranch = user.get("branch").toString()
                                 val uCollege = user.get("college").toString()
                                 val uWhatsApp = user.get("whatsapp").toString()
+                                val uDOB = user.get("dob").toString()
+                                val uEnroll = user.get("enrollment").toString()
+                                val uAddr = user.get("address").toString()
                                 val uId = user.id
 
                                 Log.d(TAG,"USER ID :---> "+uId)
-                                val userObj = User(uName,uEmail,uBranch,uCollege,uWhatsApp,uId)
+                                val userObj = User(uName,uEmail,uBranch,uCollege,uWhatsApp,uId,uDOB,uEnroll,uAddr)
                                 Utils.saveUser(this,userObj)
 
                                 Toast.makeText(this, "Welcome! "+u.toString(), Toast.LENGTH_SHORT).show()

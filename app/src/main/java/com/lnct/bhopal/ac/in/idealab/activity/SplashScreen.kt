@@ -16,7 +16,6 @@ import com.lnct.bhopal.ac.`in`.idealab.Utils
 import com.lnct.bhopal.ac.`in`.idealab.auth.LoginActivity
 
 class SplashScreen : AppCompatActivity() {
-    private lateinit var auth: FirebaseAuth;
     private lateinit var logoImg : ImageView
     private lateinit var tv2: TextView
     private lateinit var  icon_holder: LinearLayout
@@ -25,14 +24,13 @@ class SplashScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-        auth = Firebase.auth
 
         logoImg = findViewById(R.id.launch_image)
         tv2 = findViewById(R.id.tv2)
         icon_holder = findViewById(R.id.icon_holder)
 
         Handler().postDelayed({
-            if(auth.currentUser == null){
+            if(!Utils.isUserPresent(this)){
                 finish()
                 startActivity(Intent(this@SplashScreen, LoginActivity::class.java))
             }

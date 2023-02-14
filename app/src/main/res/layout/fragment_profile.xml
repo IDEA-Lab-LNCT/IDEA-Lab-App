@@ -5,27 +5,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="30dp"
-    android:background="@color/bgColor"
-    tools:context="com.lnct.bhopal.ac.in.idealab.auth.RegisterActivity"
     android:scrollbarSize="0dp"
-    >
+    tools:context=".frgments.ProfileFragment">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        >
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:fontFamily="@font/muli_bold"
-            android:text="Register"
-            android:textAllCaps="true"
-            android:textColor="@color/blue"
-            android:textSize="40sp"
-            android:textStyle="bold"/>
+            android:gravity="start"
+            android:orientation="horizontal">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_imageView"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/userimage_icon"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:layout_marginStart="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/muli_bold"
+                android:text="My Details :"
+                android:gravity="center"
+                android:textAllCaps="false"
+                android:textColor="@color/blue"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,19 +56,48 @@
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="Enter Name"
-                app:hintTextColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:hint="Registered Number"
+                android:textColorHint="#808080"
                 app:boxStrokeColor="@color/blue"
                 app:boxStrokeWidthFocused="2dp"
-                app:startIconDrawable="@drawable/id_card"
-                app:startIconTint="@color/blue"
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/blue"
+                app:hintTextColor="@color/black"
+                app:startIconDrawable="@drawable/call"
+                app:startIconTint="@color/blue"
+
+
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/evRegPhNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/muli_bold"
+                    android:inputType="phone"
+                    android:maxEms="10"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:hint="Enter Name"
                 android:textColorHint="#808080"
+                app:boxStrokeColor="@color/blue"
+                app:boxStrokeWidthFocused="2dp"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/blue"
+                app:hintTextColor="@color/black"
+                app:startIconDrawable="@drawable/id_card"
+                app:startIconTint="@color/blue"
 
 
                 >
@@ -61,19 +113,19 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_marginTop="10dp"
                 android:hint="Enter Email"
-                app:hintTextColor="@color/black"
+                android:textColorHint="#808080"
                 app:boxStrokeColor="@color/blue"
                 app:boxStrokeWidthFocused="2dp"
-                app:startIconDrawable="@drawable/email_icon"
-                app:startIconTint="@color/blue"
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/blue"
-                android:layout_marginTop="10dp"
-                android:textColorHint="#808080"
+                app:hintTextColor="@color/black"
+                app:startIconDrawable="@drawable/email_icon"
+                app:startIconTint="@color/blue"
 
 
                 >
@@ -89,188 +141,139 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_marginTop="10dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="College"
-                app:startIconTint="@color/blue"
-                app:startIconDrawable="@drawable/college"
-                app:boxStrokeColor="@color/blue"
-                app:hintTextColor="@color/black">
-
-                <AutoCompleteTextView
-                    android:id="@+id/college_dropdown_menu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:textColor="@color/black" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_marginTop="10dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Branch"
-                app:startIconTint="@color/blue"
-                app:startIconDrawable="@drawable/engineering"
-                app:boxStrokeColor="@color/blue"
-                app:hintTextColor="@color/black">
-
-                <AutoCompleteTextView
-                    android:id="@+id/branch_dropdown_menu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:textColor="@color/black" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:hint="Whatsapp Number"
-                app:hintTextColor="@color/black"
+                android:textColorHint="#808080"
                 app:boxStrokeColor="@color/blue"
                 app:boxStrokeWidthFocused="2dp"
-                app:startIconDrawable="@drawable/call"
-                app:startIconTint="@color/blue"
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/blue"
-                android:layout_marginTop="10dp"
-                android:textColorHint="#808080"
+                app:hintTextColor="@color/black"
+                app:startIconDrawable="@drawable/call"
+                app:startIconTint="@color/blue"
 
 
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/evPhNo"
-                    android:maxEms="10"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/muli_bold"
                     android:inputType="phone"
+                    android:maxEms="10"
                     android:textColor="@color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
+
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="DOB"
-                app:hintTextColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:hint="University Enrollment"
+                android:textColorHint="#808080"
                 app:boxStrokeColor="@color/blue"
                 app:boxStrokeWidthFocused="2dp"
-                app:startIconDrawable="@drawable/cake"
-                app:startIconTint="@color/blue"
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/blue"
-                android:layout_marginTop="10dp"
-                android:textColorHint="#808080"
-
-
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/evDOB"
-                    android:maxEms="10"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/muli_bold"
-                    android:inputType="date"
-                    android:textColor="@color/black" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="University Enrollment"
                 app:hintTextColor="@color/black"
-                app:boxStrokeColor="@color/blue"
-                app:boxStrokeWidthFocused="2dp"
                 app:startIconDrawable="@drawable/enroll"
                 app:startIconTint="@color/blue"
-                app:endIconMode="clear_text"
-                app:endIconTint="@color/blue"
-                android:layout_marginTop="10dp"
-                android:textColorHint="#808080"
 
 
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/evEnrollment"
-                    android:maxEms="10"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/muli_bold"
                     android:inputType="text"
+                    android:maxEms="10"
                     android:textColor="@color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginTop="10dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Semester"
+                app:startIconTint="@color/blue"
+                app:startIconDrawable="@drawable/college"
+                app:boxStrokeColor="@color/blue"
+                app:hintTextColor="@color/black">
+
+                <AutoCompleteTextView
+                    android:id="@+id/semester_dropdown_menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:hint="Address"
-                app:hintTextColor="@color/black"
+                android:textColorHint="#808080"
                 app:boxStrokeColor="@color/blue"
                 app:boxStrokeWidthFocused="2dp"
-                app:startIconDrawable="@drawable/address"
-                app:startIconTint="@color/blue"
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/blue"
-                android:layout_marginTop="10dp"
-                android:textColorHint="#808080"
+                app:hintTextColor="@color/black"
+                app:startIconDrawable="@drawable/address"
+                app:startIconTint="@color/blue"
 
 
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/evAddress"
-                    android:maxEms="10"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/muli_bold"
                     android:inputType="text"
+                    android:maxEms="10"
                     android:textColor="@color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:id="@+id/loading"
-               android:visibility="gone"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:orientation="vertical"
-                android:layout_marginTop="20dp"
                 android:layout_gravity="center"
-                android:gravity="center">
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/animation_view"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
 
-                    app:lottie_rawRes="@raw/loading"
+                    app:lottie_autoPlay="true"
 
                     app:lottie_loop="true"
 
-                    app:lottie_autoPlay="true" />
-
+                    app:lottie_rawRes="@raw/loading" />
 
 
             </LinearLayout>
-
 
 
             <Button
@@ -279,23 +282,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="@color/blue"
-                android:text="REGISTER"
-                android:textColor="@color/white"
-                 />
-
-
-
+                android:text="Update"
+                android:textColor="@color/white" />
 
 
         </LinearLayout>
-
-
-
-
-
-
-
-
 
 
     </LinearLayout>
