@@ -6,11 +6,14 @@ class User(val name : String,
            val email : String,
            val branch : String,
            val college : String,
-           val whatsapp : String,
+           var whatsapp : String,
            val _id : String,
            val dob : String,
-           val enrollment : String,
-           val address: String
+           var enrollment : String,
+           var address: String,
+           var sem : Int,
+           var github : String
 ) {
+
 
 }

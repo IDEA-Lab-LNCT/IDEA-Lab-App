@@ -42,10 +42,10 @@
                 android:layout_gravity="bottom">
 
                 <ImageView
-                    android:id="@+id/linkedin_link"
+                    android:id="@+id/website_link"
                     android:layout_width="35sp"
                     android:layout_height="35sp"
-                    android:src="@drawable/linkedin"
+                    android:src="@drawable/web"
                     android:layout_marginHorizontal="10sp"/>
 
                 <ImageView

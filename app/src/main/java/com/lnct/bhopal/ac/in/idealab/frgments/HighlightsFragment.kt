@@ -37,58 +37,6 @@ class HighlightsFragment : Fragment() {
 
     }
 
-    override fun onAttachFragment(fragment: Fragment) {
-        Log.d(TAG,"ON ATTACH CALLED")
-        super.onAttachFragment(fragment)
-        if (fragment is GalleryFragment) {
-            fragment.injectGallery(
-                GalleryDroid(
-                    listOf(
-                        Picture(
-                            fileURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/g1",
-                            fileThumbURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/g1",
-                        ),
-                        Picture(
-                            fileURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/g2",
-                            fileThumbURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/g2",
-                        ),
-                        Picture(
-                            fileURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h1",
-                            fileThumbURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h1",
-                        ),
-                        Picture(
-                            fileURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h2",
-                            fileThumbURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h2",
-                        ), Picture(
-                            fileURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h3",
-                            fileThumbURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h3",
-                        ), Picture(
-                            fileURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h4",
-                            fileThumbURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h4",
-                        ),
-                        Picture(
-                            fileURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h5",
-                            fileThumbURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h5",
-                        ),
-                        Picture(
-                            fileURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h6",
-                            fileThumbURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h6",
-                        )
-                    )
-                )
-                    .layoutManager(GalleryDroid.LAYOUT_STAGGERED_GRID)
-                    .pictureCornerRadius(16f)
-                    .pictureElevation(8f)
-                    .transformer(GalleryDroid.TRANSFORMER_CUBE_OUT)
-                    .spacing(12)
-                    .portraitColumns(1)
-                    .landscapeColumns(1)
-                    .autoClickHandler(true)
-                    .useLabels(false)
-            )
-        }
 
-
-    }
 
 }

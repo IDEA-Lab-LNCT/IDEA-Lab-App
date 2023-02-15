@@ -67,6 +67,7 @@ class RegisterActivity : AppCompatActivity(){
                 val dob = evDOB.text.toString().trim()
                 val enrollment = evEnrollment.text.toString().trim()
                 val address = evAddress.text.toString().trim()
+                val sem = evSem.text.toString().trim()
 
 
                 if(name.length != 0
@@ -76,7 +77,8 @@ class RegisterActivity : AppCompatActivity(){
                     && phone.length == 10
                     && dob.length != 0
                     && enrollment.length != 0
-                    && address.length != 0)
+                    && address.length != 0
+                    && sem.length != 0)
                     enableBtn = true
 
                 Log.d(TAG,name + " "+email + " "+branch + " "+college + " "+phone + " "+dob+" "+enrollment+" "+address)
@@ -90,7 +92,9 @@ class RegisterActivity : AppCompatActivity(){
                         "whatsapp" to phone,
                         "dob" to dob,
                         "enrollment" to enrollment,
-                        "address" to address
+                        "address" to address,
+                        "semester" to sem.toInt(),
+                        "github" to "Link not set"
                     )
                     loading.visibility = View.VISIBLE
                     btnRegister.isEnabled = false
@@ -99,7 +103,7 @@ class RegisterActivity : AppCompatActivity(){
                         .set(user)
                         .addOnSuccessListener {
                             loading.visibility = View.GONE
-                            val userObj = User(name,email,branch,college,phone,intent.getStringExtra("PHONE")!!,dob,enrollment,address)
+                            val userObj = User(name,email,branch,college,phone,intent.getStringExtra("PHONE")!!,dob,enrollment,address,sem.toInt(),"Link not set")
                             Utils.saveUser(this@RegisterActivity,userObj)
 
                             Toast.makeText(this@RegisterActivity, "Registration Complete 👍", Toast.LENGTH_SHORT).show()

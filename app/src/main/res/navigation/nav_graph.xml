@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_homeFragment_to_contactUs"
             app:destination="@id/contactUs" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutUs"
@@ -51,4 +54,9 @@
         android:name="com.lnct.bhopal.ac.in.idealab.frgments.HighlightsFragment"
         android:label="Highlights"
         tools:layout="@layout/fragment_highlights" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.lnct.bhopal.ac.in.idealab.frgments.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
