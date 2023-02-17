@@ -95,19 +95,7 @@ public class FullScreenEvent extends AppCompatActivity {
 
         if(Utils.isUserPresent(this)) {
             user_available = true;
-            String uid = Utils.getPrefs(this).getString("USER_ID", "000");
-            for(int i=0; i<id_list.length(); i++) {
-                try {
-                    if(id_list.get(i).equals(uid)) {
-                        btn.setText("Registered");
-                        btn.setBackgroundColor(getResources().getColor(R.color.gray, getTheme()));
-                        registered = true;
-                        break;
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
+            String uid = Utils.getUser(this).get_id();
         }
 
         File f = Utils.getImageCacheDir(this);

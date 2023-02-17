@@ -12,6 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
@@ -71,6 +72,7 @@ class HomeActivity : AppCompatActivity() {
                 val action = HomeFragmentDirections.actionHomeFragmentToProfileFragment()
                 navController.navigate(action)
                 drawerLayout.closeDrawer(GravityCompat.START)
+
             }else {
                 startActivity(Intent(this,LoginActivity::class.java))
                 Toast.makeText(this, "Please login to view profile.", Toast.LENGTH_LONG).show()
