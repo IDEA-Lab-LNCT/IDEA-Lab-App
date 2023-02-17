@@ -25,6 +25,9 @@ import androidx.recyclerview.widget.SnapHelper;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.VolleyError;
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.lnct.bhopal.ac.in.idealab.Constants;
 import com.lnct.bhopal.ac.in.idealab.R;
 import com.lnct.bhopal.ac.in.idealab.Utils;
@@ -68,6 +71,8 @@ public class HomeFragment extends Fragment {
     AutoScrollCircularPagerView autoScrollContainer;
     ArrayList<Integer> image_list;
     ArrayList<String> gallery_list;
+    ImageSlider slider;
+    ArrayList<SlideModel> model;
 
     CustomDialog dialog;
 
@@ -150,7 +155,7 @@ public class HomeFragment extends Fragment {
 //        video_view.start();
 //        scroll_recycler_gallery();
         scroll_recycler_event();
-        scroll_recycler_view();
+//        scroll_recycler_view();
     }
 
     @Override
@@ -164,6 +169,7 @@ public class HomeFragment extends Fragment {
         nonet = view.findViewById(R.id.nonet);
         mainview = view.findViewById(R.id.mainview);
         refresh_btn = view.findViewById(R.id.refresh_btn);
+        slider = view.findViewById(R.id.image_slider);
 
 //        video_view = view.findViewById(R.id.video_view);
 //        video_view.setAudioFocusRequest(AudioManager.AUDIOFOCUS_NONE);
@@ -186,6 +192,14 @@ public class HomeFragment extends Fragment {
 
 //        autoScrollContainer = view.findViewById(R.id.autoScrollContainer);
 //        autoScrollContainer.setItems(image_list, true);
+
+        model = new ArrayList<>();
+        model.add(new SlideModel("android.resource://com.lnct.bhopal.ac.in.idealab/drawable/slide_a", ScaleTypes.FIT));
+        model.add(new SlideModel("android.resource://com.lnct.bhopal.ac.in.idealab/drawable/slide_b", ScaleTypes.FIT));
+        model.add(new SlideModel("android.resource://com.lnct.bhopal.ac.in.idealab/drawable/slide_c", ScaleTypes.FIT));
+        model.add(new SlideModel("android.resource://com.lnct.bhopal.ac.in.idealab/drawable/slide_d", ScaleTypes.FIT));
+        model.add(new SlideModel("android.resource://com.lnct.bhopal.ac.in.idealab/drawable/slide_e", ScaleTypes.FIT));
+        slider.setImageList(model);
 
         gallery_list = new ArrayList<>();
         gallery_list.add("android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h1");
@@ -214,7 +228,7 @@ public class HomeFragment extends Fragment {
 
 
         ArrayList<EventModel> list_event = new ArrayList<>();
-        list_event.add(new EventModel("001", "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/intern", "IDEA Lab internship", "14-01-2023", "Internship oppurtnity at IDEA Lab LNCT, with stipend of 5000rs.", "----------", false, new JSONArray()));
+//        list_event.add(new EventModel("001", "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/intern", "IDEA Lab internship", "14-01-2023", "Internship oppurtnity at IDEA Lab LNCT, with stipend of 5000rs.", "----------", false, new JSONArray()));
         event_adapter = new HomeUpcomingEventAdapter(list_event, getContext());
         event_view = view.findViewById(R.id.upcoming_events_view);
         event_view.setLayoutManager(event_manager);
@@ -227,10 +241,10 @@ public class HomeFragment extends Fragment {
         list.add(getResources().getDrawable(R.drawable.slide_d));
         list.add(getResources().getDrawable(R.drawable.slide_e));
 
-        scroll_recycler_view = view.findViewById(R.id.scroll_recycler_view);
-        ScrollRecyclerAdapter adap = new ScrollRecyclerAdapter(list, getContext());
-        scroll_recycler_view.setLayoutManager(view_manager);
-        scroll_recycler_view.setAdapter(adap);
+//        scroll_recycler_view = view.findViewById(R.id.scroll_recycler_view);
+//        ScrollRecyclerAdapter adap = new ScrollRecyclerAdapter(list, getContext());
+//        scroll_recycler_view.setLayoutManager(view_manager);
+//        scroll_recycler_view.setAdapter(adap);
 
 //        event_view.addOnScrollListener(new RecyclerView.OnScrollListener() {
 //            @Override

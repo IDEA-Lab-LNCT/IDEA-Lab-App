@@ -74,8 +74,12 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
+
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
+
     // dependencies for navigation view (nav_graph)
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+
 
 }

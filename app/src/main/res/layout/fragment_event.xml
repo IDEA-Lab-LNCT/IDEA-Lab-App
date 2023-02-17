@@ -67,11 +67,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/gray_curved_background"
-                    android:text="Upcoming Events"
-                    android:elevation="10sp"
+                    android:text="Register for events"
+                    android:elevation="5sp"
                     android:layout_margin="10sp"
-                    android:textColor="@color/logo_blue"
-                    android:textSize="25sp"
+                    android:textColor="@color/blue"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -80,19 +80,19 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:itemCount="2"
+                    tools:itemCount="1"
                     tools:listitem="@layout/event_recycler_layout" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="20sp"
                     android:layout_margin="10sp"
-                    android:text="Past Events"
-                    android:textSize="25sp"
+                    android:text="Events"
+                    android:elevation="5sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     android:background="@drawable/gray_curved_background"
-                    android:textColor="@color/logo_blue"/>
+                    android:textColor="@color/blue"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/past_event_view"

@@ -73,45 +73,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/scroll_recycler_view"
+                <com.denzcoskun.imageslider.ImageSlider
+                    android:id="@+id/image_slider"
                     android:layout_width="match_parent"
-                    tools:listitem="@layout/scroll_recycler_layout"
-                    android:layout_height="wrap_content"/>
-
-<!--                <VideoView-->
-<!--                    android:id="@+id/video_view"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_margin="2sp"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"/>-->
-
-<!--                <com.mindinventory.AutoScrollCircularPagerView-->
-<!--                    android:id="@+id/autoScrollContainer"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="200dp"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    app:auto_scroll_delay="5000"-->
-<!--                    app:dot_margin="20dp"-->
-<!--                    app:dot_gravity="bottom"-->
-<!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                    app:layout_constraintRight_toRightOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:selected_dot_color="@color/blue"-->
-<!--                    app:unselected_dot_color="@color/white" />-->
+                    android:layout_height="wrap_content"
+                    app:iss_auto_cycle="true"
+                    app:iss_period="1000"
+                    app:iss_delay="0"/>
 
             </androidx.cardview.widget.CardView>
-
-<!--            <com.google.android.material.divider.MaterialDivider-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="2sp"-->
-<!--                android:layout_marginTop="2sp"-->
-<!--                android:elevation="10sp"-->
-<!--                android:background="@color/dark_blue"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/cardView2"/>-->
-
 
             <LinearLayout
                 android:id="@+id/upcoming_event_layout"
@@ -143,10 +113,6 @@
                     app:layout_constraintDimensionRatio="1"
                     tools:listitem="@layout/upcoming_events_recycler" />
 
-                <!--                <com.google.android.material.divider.MaterialDivider-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="3sp"-->
-                <!--                    android:background="@color/gray"/>-->
                 <TextView
                     android:id="@+id/pos_tv"
                     android:layout_width="match_parent"
@@ -179,15 +145,6 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <!--                <androidx.recyclerview.widget.RecyclerView-->
-                <!--                    android:id="@+id/upcoming_event_view"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:orientation="vertical"-->
-                <!--                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-                <!--                    app:layout_constraintDimensionRatio="1"-->
-                <!--                    tools:listitem="@layout/home_fragment_gallery" />-->
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/gallery_recycler"
                     android:layout_width="match_parent"
@@ -209,25 +166,8 @@
                     android:textAlignment="center"
                     android:textSize="12sp"
                     android:textStyle="bold" />
-                <!--                <com.google.android.material.divider.MaterialDivider-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="3sp"-->
-                <!--                    android:background="@color/gray"/>-->
 
             </LinearLayout>
-
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/gallery_recycler"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="0dp"-->
-<!--                android:orientation="horizontal"-->
-<!--                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--                app:layout_constraintDimensionRatio="1"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/upcoming_event_layout"-->
-<!--                tools:itemCount="5"-->
-<!--                tools:listitem="@layout/home_fragment_gallery" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
