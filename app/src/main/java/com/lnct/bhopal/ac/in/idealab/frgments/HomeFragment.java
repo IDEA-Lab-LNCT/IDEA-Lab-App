@@ -17,6 +17,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -293,23 +294,8 @@ public class HomeFragment extends Fragment {
         refresh_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment currentFragment = getActivity().getSupportFragmentManager().findFragmentById(R.id.container);
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    fragmentManager.beginTransaction().detach(currentFragment).commitNow();
-                    fragmentManager.beginTransaction().attach(currentFragment).commitNow();
-                } else {
-                    fragmentManager.beginTransaction().detach(currentFragment).attach(currentFragment).commit();
-                }
+                Navigation.findNavController(view).navigate(R.id.homeFragment);
 
-//                Fragment currentFragment = getActivity().getSupportFragmentManager().findFragmentById(R.id.container);
-//
-//                if (currentFragment instanceof HomeFragment) {
-//                    FragmentTransaction fragTransaction =   (getActivity()).getSupportFragmentManager().beginTransaction();
-//                    fragTransaction.detach(currentFragment);
-//                    fragTransaction.attach(currentFragment);
-//                    fragTransaction.commit();
-//                }
             }
         });
 

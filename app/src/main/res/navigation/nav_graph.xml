@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.lnct.bhopal.ac.in.idealab.frgments.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_aboutUs"
+            app:destination="@id/aboutUs" />
+        <action
+            android:id="@+id/action_homeFragment_to_projectFragment"
+            app:destination="@id/projectFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_event2"
+            app:destination="@id/event2" />
+        <action
+            android:id="@+id/action_homeFragment_to_highlightsFragment"
+            app:destination="@id/highlightsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_contactUs"
+            app:destination="@id/contactUs" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutUs"
+        android:name="com.lnct.bhopal.ac.in.idealab.frgments.AboutUs"
+        android:label="About Us"
+        tools:layout="@layout/fragment_about_us" />
+    <fragment
+        android:id="@+id/contactUs"
+        android:name="com.lnct.bhopal.ac.in.idealab.frgments.ContactUs"
+        android:label="Contact Us"
+        tools:layout="@layout/fragment_contact_us" />
+    <fragment
+        android:id="@+id/event2"
+        android:name="com.lnct.bhopal.ac.in.idealab.frgments.Event"
+        android:label="Events"
+        tools:layout="@layout/fragment_event" />
+    <fragment
+        android:id="@+id/projectFragment"
+        android:name="com.lnct.bhopal.ac.in.idealab.frgments.ProjectFragment"
+        android:label="Projects"
+        tools:layout="@layout/fragment_project" />
+    <fragment
+        android:id="@+id/highlightsFragment"
+        android:name="com.lnct.bhopal.ac.in.idealab.frgments.HighlightsFragment"
+        android:label="Highlights"
+        tools:layout="@layout/fragment_highlights" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.lnct.bhopal.ac.in.idealab.frgments.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>

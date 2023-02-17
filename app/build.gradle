@@ -6,6 +6,7 @@ plugins {
 }
 // Plugin for direct view binding in kotlin (no need for findViewById())
 apply plugin: 'kotlin-android-extensions'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 
 
@@ -16,8 +17,8 @@ android {
         applicationId "com.lnct.bhopal.ac.in.idealab"
         minSdk 26
         targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -73,6 +74,12 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
+
     implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
+
+    // dependencies for navigation view (nav_graph)
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+
 
 }
