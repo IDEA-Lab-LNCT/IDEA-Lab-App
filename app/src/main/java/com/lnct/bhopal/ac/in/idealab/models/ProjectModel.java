@@ -1,5 +1,7 @@
 package com.lnct.bhopal.ac.in.idealab.models;
 
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -64,6 +66,11 @@ public class ProjectModel {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        return model;
+    }
+
+    public static ProjectModel objToProjectModel(QueryDocumentSnapshot document) {
+        ProjectModel model = new ProjectModel(document.getId(), document.getString("image_url"), document.getString("desc"), document.getString("title"), document.getString("github_link"), document.getString("live_link"));
         return model;
     }
 

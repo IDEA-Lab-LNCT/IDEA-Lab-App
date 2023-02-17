@@ -3,6 +3,7 @@ package com.lnct.bhopal.ac.in.idealab.frgments;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -14,15 +15,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.VolleyError;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.lnct.bhopal.ac.in.idealab.Constants;
 import com.lnct.bhopal.ac.in.idealab.R;
 import com.lnct.bhopal.ac.in.idealab.Utils;
 import com.lnct.bhopal.ac.in.idealab.VolleyRequest;
 import com.lnct.bhopal.ac.in.idealab.adapters.ProjectFragmentAdapter;
 import com.lnct.bhopal.ac.in.idealab.interfaces.CallBack;
+import com.lnct.bhopal.ac.in.idealab.models.EventModel;
 import com.lnct.bhopal.ac.in.idealab.models.ProjectModel;
 
 import org.json.JSONArray;
@@ -44,6 +52,7 @@ public class ProjectFragment extends Fragment {
     CardView nonet;
     TextView refresh_btn;
     ProjectFragmentAdapter adapter;
+    FirebaseFirestore db;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -89,7 +98,6 @@ public class ProjectFragment extends Fragment {
     public void onStart() {
         super.onStart();
         if(Utils.isNetworkAvailable(getContext())) {
-            project_list = new ArrayList<>();
             nonet.setVisibility(View.GONE);
         }
         else {
@@ -102,6 +110,10 @@ public class ProjectFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_project, container, false);
+
+        db = FirebaseFirestore.getInstance();
+        dialog = new CustomDialog(getContext());
+        dialog.show();
 
         project_rv = v.findViewById(R.id.project_rv);
         nonet = v.findViewById(R.id.nonet);
@@ -120,7 +132,9 @@ public class ProjectFragment extends Fragment {
 //        dialog.show();
 
 //        fetchData();
-        static_projects();
+//        static_projects();
+        getAndLoadEvents();
+
         refresh_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -138,52 +152,76 @@ public class ProjectFragment extends Fragment {
         return v;
     }
 
-    private void static_projects() {
-        ProjectModel p1 = new ProjectModel("001", "https://idea-lab.vercel.app/static/media/jpgtry.cbb41189f783b5c013a3.jpg",
-                "This is a Basic Banking website build with react,firebase", "E-commerce Website", "https://github.com/ritik2727/BankingSystem", "");
-        ProjectModel p2 = new ProjectModel("002", "https://screenshots.codesandbox.io/351mht/2.png", "Application for LNCT IDEA Lab", "LNCT IDEA Lab App", "", "");
-        ProjectModel p3 = new ProjectModel("003", "https://idea-lab.vercel.app/static/media/ngowf.ebbaf62c730122559891.jpg", "Website Payment integration using stripe in Donation website .Tech stack — ReactJS | Stripe | Material-UI .", "NGO App", "https://github.com/ritik2727/Payment_integration", "https://donation-two.vercel.app/");
-        ProjectModel p4 = new ProjectModel("004", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-7GPSzgbkhFjpOyRUk3UGQvYPw3rfvF4vaA&usqp=CAU", "Website designed for LNCT IDEA LAB, Bhopal", "IDEA Lab Website", "https://github.com/piyushpp07/IdeaLab", "https://idea-lab.vercel.app/");
+    private void getAndLoadEvents() {
 
-        project_list.add(p2);
-        project_list.add(p4);
-        project_list.add(p1);
-        project_list.add(p3);
+        dialog.show();
 
-        adapter.updateView(project_list);
-    }
+        db.collection("projects").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
 
-    public void fetchData() {
-        VolleyRequest req = new VolleyRequest(getContext(), new CallBack() {
-            @Override
-            public void responseCallback(JSONObject response) {
-                try {
-                    JSONArray success = (JSONArray) response.get("success");
-                    for(int i = 0; i< success.length(); i++) {
-                        JSONObject obj = (JSONObject) success.get(i);
-                        ProjectModel model = ProjectModel.objToProjectmodel(obj);
-                        project_list.add(model);
+                                ProjectModel model = ProjectModel.objToProjectModel(document);
+                                project_list.add(model);
+                                if(dialog.isShowing()) dialog.dismiss();
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                        else {
+                            Toast.makeText(getContext(), "Some error occured", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    adapter.updateView(project_list);
-                    if(dialog != null && dialog.isShowing()) dialog.dismiss();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void errorCallback(VolleyError error_message) {
-                Log.i("-----error event frag-----", error_message.getMessage());
-                if(dialog != null && dialog.isShowing()) dialog.dismiss();
-            }
-
-            @Override
-            public void responseStatus(NetworkResponse response_code) {
-                Log.i("-----response status home frag-----", response_code.statusCode+"");
-
-            }
-        });
-
-        req.getRequest(Constants.URL_GET_PROJECTS);
+                });
     }
+
+//    private void static_projects() {
+//        ProjectModel p1 = new ProjectModel("001", "https://idea-lab.vercel.app/static/media/jpgtry.cbb41189f783b5c013a3.jpg",
+//                "This is a Basic Banking website build with react,firebase", "E-commerce Website", "https://github.com/ritik2727/BankingSystem", "");
+//        ProjectModel p2 = new ProjectModel("002", "https://screenshots.codesandbox.io/351mht/2.png", "Application for LNCT IDEA Lab", "LNCT IDEA Lab App", "", "");
+//        ProjectModel p3 = new ProjectModel("003", "https://idea-lab.vercel.app/static/media/ngowf.ebbaf62c730122559891.jpg", "Website Payment integration using stripe in Donation website .Tech stack — ReactJS | Stripe | Material-UI .", "NGO App", "https://github.com/ritik2727/Payment_integration", "https://donation-two.vercel.app/");
+//        ProjectModel p4 = new ProjectModel("004", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-7GPSzgbkhFjpOyRUk3UGQvYPw3rfvF4vaA&usqp=CAU", "Website designed for LNCT IDEA LAB, Bhopal", "IDEA Lab Website", "https://github.com/piyushpp07/IdeaLab", "https://idea-lab.vercel.app/");
+//
+//        project_list.add(p2);
+//        project_list.add(p4);
+//        project_list.add(p1);
+//        project_list.add(p3);
+//
+//        adapter.updateView(project_list);
+//    }
+
+//    public void fetchData() {
+//        VolleyRequest req = new VolleyRequest(getContext(), new CallBack() {
+//            @Override
+//            public void responseCallback(JSONObject response) {
+//                try {
+//                    JSONArray success = (JSONArray) response.get("success");
+//                    for(int i = 0; i< success.length(); i++) {
+//                        JSONObject obj = (JSONObject) success.get(i);
+//                        ProjectModel model = ProjectModel.objToProjectmodel(obj);
+//                        project_list.add(model);
+//                    }
+//                    adapter.updateView(project_list);
+//                    if(dialog != null && dialog.isShowing()) dialog.dismiss();
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void errorCallback(VolleyError error_message) {
+//                Log.i("-----error event frag-----", error_message.getMessage());
+//                if(dialog != null && dialog.isShowing()) dialog.dismiss();
+//            }
+//
+//            @Override
+//            public void responseStatus(NetworkResponse response_code) {
+//                Log.i("-----response status home frag-----", response_code.statusCode+"");
+//
+//            }
+//        });
+//
+//        req.getRequest(Constants.URL_GET_PROJECTS);
+//    }
 }
