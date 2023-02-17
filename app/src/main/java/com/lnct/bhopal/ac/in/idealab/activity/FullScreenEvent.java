@@ -67,17 +67,6 @@ public class FullScreenEvent extends AppCompatActivity {
                 .setView(dialog_view)
                 .create();
 
-//        title_ = intent.getStringExtra("title");
-//        desc_ = intent.getStringExtra("desc");
-//        date_ = intent.getStringExtra("date");
-//        id_ = intent.getStringExtra("id");
-//
-//        try {
-//            id_list = new JSONArray(intent.getStringExtra("event_id"));
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-
         event_image = findViewById(R.id.event_imageholder);
         title = findViewById(R.id.event_titleholder);
         date = findViewById(R.id.event_dateholder);
@@ -98,16 +87,16 @@ public class FullScreenEvent extends AppCompatActivity {
             String uid = Utils.getUser(this).get_id();
         }
 
-        File f = Utils.getImageCacheDir(this);
-        File image = new File(f,  File.separator + id_ + ".jpeg");
-        FileInputStream in = null;
-        try {
-             in = new FileInputStream(image);
-            Bitmap bmp = BitmapFactory.decodeStream(in);
-            event_image.setImageBitmap(bmp);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+//        File f = Utils.getImageCacheDir(this);
+//        File image = new File(f,  File.separator + id_ + ".jpeg");
+//        FileInputStream in = null;
+//        try {
+//             in = new FileInputStream(image);
+//            Bitmap bmp = BitmapFactory.decodeStream(in);
+//            event_image.setImageBitmap(bmp);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
 
 //        for(EventModel ev: Constants.event_list) {
 //            if(ev.getId().equals(s)) {
