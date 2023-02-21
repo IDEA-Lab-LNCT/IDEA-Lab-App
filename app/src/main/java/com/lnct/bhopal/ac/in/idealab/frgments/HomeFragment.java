@@ -28,6 +28,11 @@ import com.android.volley.VolleyError;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.lnct.bhopal.ac.in.idealab.Constants;
 import com.lnct.bhopal.ac.in.idealab.R;
 import com.lnct.bhopal.ac.in.idealab.Utils;
@@ -70,10 +75,11 @@ public class HomeFragment extends Fragment {
     int cur_pos_event, cur_pos_gallery, next_pos_event;
     AutoScrollCircularPagerView autoScrollContainer;
     ArrayList<Integer> image_list;
+    ArrayList<EventModel> list_event;
     ArrayList<String> gallery_list;
     ImageSlider slider;
     ArrayList<SlideModel> model;
-
+    FirebaseFirestore db;
     CustomDialog dialog;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -154,7 +160,7 @@ public class HomeFragment extends Fragment {
 
 //        video_view.start();
 //        scroll_recycler_gallery();
-        scroll_recycler_event();
+//        scroll_recycler_event();
 //        scroll_recycler_view();
     }
 
@@ -163,6 +169,9 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         cur_pos_event = -1;
+
+        db = FirebaseFirestore.getInstance();
+        getAndLoadEvents();
 
         pos_tv = view.findViewById(R.id.pos_tv);
         pos_tv_gallery = view.findViewById(R.id.pos_tv_gallery);
@@ -227,7 +236,7 @@ public class HomeFragment extends Fragment {
         gallery_view.setAdapter(gallery_adapter);
 
 
-        ArrayList<EventModel> list_event = new ArrayList<>();
+        list_event = new ArrayList<>();
 //        list_event.add(new EventModel("001", "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/intern", "IDEA Lab internship", "14-01-2023", "Internship oppurtnity at IDEA Lab LNCT, with stipend of 5000rs.", "----------", false, new JSONArray()));
         event_adapter = new HomeUpcomingEventAdapter(list_event, getContext());
         event_view = view.findViewById(R.id.upcoming_events_view);
@@ -311,6 +320,25 @@ public class HomeFragment extends Fragment {
         snap_helper3.attachToRecyclerView(scroll_recycler_view);
 
         return view;
+    }
+
+    private void getAndLoadEvents() {
+
+        db.collection("events").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                EventModel model = EventModel.objToEventModel(document);
+                                if(!model.isPast_event()) list_event.add(model);
+
+                                event_adapter.notifyDataSetChanged();
+                            }
+                        }
+                    }
+                });
     }
 
 //    private void scroll_recycler_gallery() {

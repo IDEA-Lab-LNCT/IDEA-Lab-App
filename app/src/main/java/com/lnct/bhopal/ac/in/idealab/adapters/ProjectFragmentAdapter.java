@@ -46,7 +46,7 @@ public class ProjectFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 //        TODO uncomment these lines
         holder.title_text.setText(list.get(position).getTitle());
         holder.desc_text.setText(list.get(position).getDesc());
-        if(list.get(position).getLiveLink().trim().length() != 0) {
+        if(list.get(position).getLiveLink() != null && list.get(position).getLiveLink().trim().length() != 0) {
             holder.link_view.setVisibility(View.VISIBLE);
             holder.link_view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -58,7 +58,7 @@ public class ProjectFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 }
             });
         }
-        if(list.get(position).getGithubLink().trim().length() != 0) {
+        if(list.get(position).getGithubLink() != null && list.get(position).getGithubLink().trim().length() != 0) {
             holder.link_code.setVisibility(View.VISIBLE);
             holder.link_code.setOnClickListener(new View.OnClickListener() {
                 @Override
