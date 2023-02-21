@@ -108,10 +108,6 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
                     bundle.putSerializable("event", event_list.get(hold.getAbsoluteAdapterPosition()));
 
                     Navigation.findNavController(view).navigate(R.id.fullscreenEventFragment,bundle);
-
-//                    Intent i = new Intent(c, FullScreenEvent.class);
-//                    i.putExtra("data", event_list.get(holder.getAbsoluteAdapterPosition()));
-//                    c.startActivity(i);
                 }
             });
 

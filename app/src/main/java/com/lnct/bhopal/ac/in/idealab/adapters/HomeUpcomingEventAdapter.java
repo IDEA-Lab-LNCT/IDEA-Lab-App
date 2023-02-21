@@ -2,6 +2,7 @@ package com.lnct.bhopal.ac.in.idealab.adapters;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -51,6 +53,13 @@ public class HomeUpcomingEventAdapter extends RecyclerView.Adapter<RecyclerView.
                     .placeholder(R.drawable.app_logo)
                     .error(R.drawable.app_logo)
                     .into(holder.event_image);
+
+            hold.itemView.setOnClickListener( vw -> {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("event", event_list.get(hold.getAbsoluteAdapterPosition()));
+
+                Navigation.findNavController(vw).navigate(R.id.fullscreenEventFragment,bundle);
+            });
         }
     }
 

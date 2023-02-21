@@ -3,6 +3,7 @@ package com.lnct.bhopal.ac.in.idealab.frgments;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
@@ -17,13 +18,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.lnct.bhopal.ac.in.idealab.R;
 import com.lnct.bhopal.ac.in.idealab.Utils;
 import com.lnct.bhopal.ac.in.idealab.activity.FullScreenEvent;
+import com.lnct.bhopal.ac.in.idealab.auth.LoginActivity;
 import com.lnct.bhopal.ac.in.idealab.models.EventModel;
 import com.lnct.bhopal.ac.in.idealab.quiz.AssesmentDescriptionActivity;
 
 import org.json.JSONArray;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,7 +49,7 @@ public class FullscreenEventFragment extends Fragment {
     private String mParam2;
 
     ImageView event_image;
-    TextView title, date, desc, btn, edit_btn, cont_btn;
+    TextView title, date, desc, btn, edit_btn, cont_btn, register_btn;
     EventModel event;
     ImageView back;
 
@@ -57,6 +64,7 @@ public class FullscreenEventFragment extends Fragment {
 
     View dialog_view;
     AlertDialog dialog;
+    FirebaseFirestore db;
 
     public FullscreenEventFragment() {
         // Required empty public constructor
@@ -95,6 +103,8 @@ public class FullscreenEventFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_fullscreen_event, container, false);
 
+        db = FirebaseFirestore.getInstance();
+
         bundle = getArguments();
         model = (EventModel) bundle.getSerializable("event");
 
@@ -128,13 +138,31 @@ public class FullscreenEventFragment extends Fragment {
         if(Utils.isUserPresent(getContext())) {
             user_available = true;
             String uid = Utils.getUser(getContext()).get_id();
+            for(String id: model.getId_list()) {
+                if(id.compareTo(uid) == 0) {
+                    registered = true;
+                    btn.setText("Registered");
+                    break;
+                }
+            }
         }
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.show();
 //                TODO: uncomment the following lines for user availblity and registered list
+                if(registered) Toast.makeText(getContext(), "Already registered", Toast.LENGTH_SHORT).show();
+                else if(Utils.isUserPresent(getContext())) {
+                    String id = Utils.getUser(getContext()).get_id();
+                    dialog.show();
+                }
+                else {
+                    Toast.makeText(getContext(), "Login to register", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(i);
+                    getActivity().finish();
+                    getActivity().finishAffinity();
+                }
 //                if(user_available) {
 //                    if(!registered) {
 //                        dialog.show();
@@ -159,9 +187,13 @@ public class FullscreenEventFragment extends Fragment {
 
         cont_btn.setOnClickListener(vw -> {
 //            TODO: add navgraph for quiz activity
-            Intent intent1 = new Intent(getContext(), AssesmentDescriptionActivity.class);
-            startActivity(intent1);
-            if(dialog.isShowing()) dialog.dismiss();
+            ArrayList<String> lst = model.getId_list();
+            lst.add(Utils.getUser(getContext()).get_id());
+            update(lst, view);
+            cont_btn.setText("Please wait");
+            cont_btn.setClickable(false);
+            edit_btn.setClickable(false);
+            dialog.setCancelable(false);
         });
 
         title.setText(title_);
@@ -170,4 +202,19 @@ public class FullscreenEventFragment extends Fragment {
 
         return view;
     }
+
+    public void update(ArrayList<String> lst, View v) {
+        db.collection("events").document(model.getId()).update("ids", lst).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()) {
+                    Toast.makeText(getContext(), "Event registration sucessful", Toast.LENGTH_SHORT).show();
+                    Navigation.findNavController(v).navigate(R.id.event2);
+                }
+                else Toast.makeText(getContext(), "Some error occured", Toast.LENGTH_SHORT).show();
+                if(dialog.isShowing()) dialog.dismiss();
+            }
+        });
+    }
+
 }
