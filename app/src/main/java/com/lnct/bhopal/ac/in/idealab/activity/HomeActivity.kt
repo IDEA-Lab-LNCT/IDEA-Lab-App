@@ -28,6 +28,7 @@ import com.lnct.bhopal.ac.`in`.idealab.Constants.idealab_website
 import com.lnct.bhopal.ac.`in`.idealab.R
 import com.lnct.bhopal.ac.`in`.idealab.Utils
 import com.lnct.bhopal.ac.`in`.idealab.auth.LoginActivity
+import com.lnct.bhopal.ac.`in`.idealab.frgments.EventDirections
 import com.lnct.bhopal.ac.`in`.idealab.frgments.HomeFragmentDirections
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.nav_header.view.*
@@ -80,7 +81,9 @@ class HomeActivity : AppCompatActivity() {
 
         header.view_profile_button.setOnClickListener {
             if(Utils.isUserPresent(this)){
+
                 navController.navigate(R.id.profileFragment)
+
                 drawerLayout.closeDrawer(GravityCompat.START)
 
             }else {

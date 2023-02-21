@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -32,6 +35,7 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     Context c;
     ArrayList<EventModel> event_list;
+    ViewGroup parent;
 
     public EventRecyclerAdapter(Context c, ArrayList<EventModel> event_list) {
         this.c = c;
@@ -63,6 +67,7 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        this.parent = parent;
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_recycler_layout, parent, false);
 
@@ -98,41 +103,11 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
             holder.mainview.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    if (!event_list.get(hold.getAbsoluteAdapterPosition()).isPast_event()) {
-////                        TODO add intent to quiz activity
-//                    }
-//                    else {
-//                        File f = Utils.getImageCacheDir(c);
-//
-//                        File image = new File(f,  File.separator + event_list.get(hold.getAbsoluteAdapterPosition()).getId()+".jpeg");
-//                        if(!image.exists()) {
-//                            try {
-//                                image.createNewFile();
-//                            } catch (IOException e) {
-//                                e.printStackTrace();
-//                            }
-//                            Bitmap bmp = ((BitmapDrawable) holder.event_image.getDrawable()).getBitmap();
-//                            try {
-//                                FileOutputStream out = new FileOutputStream(image);
-//                                bmp.compress(Bitmap.CompressFormat.JPEG, 100, out);
-//                            } catch (FileNotFoundException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
 
-//                    Log.i("event ids", event_list.get(hold.getAbsoluteAdapterPosition()).getIds().toString());
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("event", event_list.get(hold.getAbsoluteAdapterPosition()));
 
-                        Intent i = new Intent(c, FullScreenEvent.class);
-                        i.putExtra("data", event_list.get(holder.getAbsoluteAdapterPosition()));
-//                        i.putExtra("id", event_list.get(hold.getAbsoluteAdapterPosition()).getId());
-////                        i.putExtra("event_id", event_list.get(hold.getAbsoluteAdapterPosition()).getIds().toString());
-////                        i.putStringArrayListExtra("registered_ids", event_list.get(holder.getAbsoluteAdapterPosition().g))
-//                        i.putExtra("title", event_list.get(hold.getAbsoluteAdapterPosition()).getTitle());
-//                        i.putExtra("desc", event_list.get(hold.getAbsoluteAdapterPosition()).getDesc());
-//                        i.putExtra("date", "Start Date:" + event_list.get(hold.getAbsoluteAdapterPosition()).getStart_date() + " | End Date:" + event_list.get(hold.getAbsoluteAdapterPosition()).getEnd_date());
-                        c.startActivity(i);
-
-//                    }
+                    Navigation.findNavController(view).navigate(R.id.fullscreenEventFragment,bundle);
                 }
             });
 

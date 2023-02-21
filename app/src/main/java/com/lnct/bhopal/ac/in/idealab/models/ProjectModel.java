@@ -70,7 +70,8 @@ public class ProjectModel {
     }
 
     public static ProjectModel objToProjectModel(QueryDocumentSnapshot document) {
-        ProjectModel model = new ProjectModel(document.getId(), document.getString("image_url"), document.getString("desc"), document.getString("title"), document.getString("github_link"), document.getString("live_link"));
+        ProjectModel model = new ProjectModel(document.getId(), document.getString("imageURL"), document.getString("di" +
+                "scription"), document.getString("title"), document.getString("projectLink"), document.getString("codeURL"));
         return model;
     }
 

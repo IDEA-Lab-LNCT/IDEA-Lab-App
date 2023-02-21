@@ -95,6 +95,14 @@ public class EventModel implements Serializable {
 
     }
 
+    public String getLast_reg_date() {
+        return last_reg_date;
+    }
+
+    public ArrayList<String> getId_list() {
+        return id_list;
+    }
+
     public static EventModel objToEventModel(QueryDocumentSnapshot document) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

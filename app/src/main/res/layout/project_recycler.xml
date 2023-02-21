@@ -13,7 +13,7 @@
         android:padding="10sp"
         android:shadowColor="@color/dark_blue"
         android:shadowRadius="1"
-        android:elevation="5sp"
+        android:elevation="3sp"
         android:shadowDx="1"
         android:shadowDy="1"
         android:text="Project Title"
@@ -74,7 +74,7 @@
         <TextView
             android:id="@+id/view_site"
             android:layout_width="100sp"
-            android:layout_height="50sp"
+            android:layout_height="45sp"
             android:text="View"
             android:visibility="visible"
             android:textSize="20sp"
@@ -86,7 +86,7 @@
         <TextView
             android:id="@+id/view_code"
             android:layout_width="100sp"
-            android:layout_height="50sp"
+            android:layout_height="45sp"
             android:visibility="visible"
             android:text="Code"
             android:drawableRight="@drawable/code_image"

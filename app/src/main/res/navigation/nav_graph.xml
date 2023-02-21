@@ -43,7 +43,11 @@
         android:id="@+id/event2"
         android:name="com.lnct.bhopal.ac.in.idealab.frgments.Event"
         android:label="Events"
-        tools:layout="@layout/fragment_event" />
+        tools:layout="@layout/fragment_event" >
+        <action
+            android:id="@+id/action_event2_to_fullscreenEventFragment"
+            app:destination="@id/fullscreenEventFragment" />
+    </fragment>
     <fragment
         android:id="@+id/projectFragment"
         android:name="com.lnct.bhopal.ac.in.idealab.frgments.ProjectFragment"
@@ -72,4 +76,16 @@
             android:id="@+id/action_skillsFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/fullscreenEventFragment"
+        android:name="com.lnct.bhopal.ac.in.idealab.frgments.FullscreenEventFragment"
+        android:label="Events"
+        tools:layout="@layout/fragment_fullscreen_event" >
+        <argument
+            android:name="EventData"
+            app:argType="com.lnct.bhopal.ac.in.idealab.models.EventModel" />
+        <action
+            android:id="@+id/action_fullscreenEventFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 </navigation>
