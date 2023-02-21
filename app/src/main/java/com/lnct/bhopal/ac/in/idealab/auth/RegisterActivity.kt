@@ -17,6 +17,7 @@ import com.lnct.bhopal.ac.`in`.idealab.Utils
 import com.lnct.bhopal.ac.`in`.idealab.activity.HomeActivity
 import kotlinx.android.synthetic.main.activity_register.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class RegisterActivity : AppCompatActivity(){
     private val db = Firebase.firestore
@@ -81,6 +82,8 @@ class RegisterActivity : AppCompatActivity(){
                     && sem.length != 0)
                     enableBtn = true
 
+                 val skills = kotlin.collections.ArrayList<String>()
+
                 Log.d(TAG,name + " "+email + " "+branch + " "+college + " "+phone + " "+dob+" "+enrollment+" "+address)
 
                 if(enableBtn){
@@ -94,7 +97,8 @@ class RegisterActivity : AppCompatActivity(){
                         "enrollment" to enrollment,
                         "address" to address,
                         "semester" to sem.toInt(),
-                        "github" to "Link not set"
+                        "github" to "Link not set",
+                        "skills" to skills
                     )
                     loading.visibility = View.VISIBLE
                     btnRegister.isEnabled = false
@@ -103,7 +107,7 @@ class RegisterActivity : AppCompatActivity(){
                         .set(user)
                         .addOnSuccessListener {
                             loading.visibility = View.GONE
-                            val userObj = User(name,email,branch,college,phone,intent.getStringExtra("PHONE")!!,dob,enrollment,address,sem.toInt(),"Link not set")
+                            val userObj = User(name,email,branch,college,phone,intent.getStringExtra("PHONE")!!,dob,enrollment,address,sem.toInt(),"Link not set",skills)
                             Utils.saveUser(this@RegisterActivity,userObj)
 
                             Toast.makeText(this@RegisterActivity, "Registration Complete 👍", Toast.LENGTH_SHORT).show()

@@ -3,7 +3,9 @@ package com.lnct.bhopal.ac.`in`.idealab.activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
+import android.nfc.Tag
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,11 +14,12 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.jesusd0897.gallerydroid.model.GalleryDroid
 import com.jesusd0897.gallerydroid.model.Picture
 import com.jesusd0897.gallerydroid.view.fragment.GalleryFragment
@@ -33,11 +36,13 @@ private lateinit var navController: NavController
 class HomeActivity : AppCompatActivity() {
 
     private val TAG = "HOME"
+    val db = Firebase.firestore
 
     private lateinit var auth: FirebaseAuth;
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
     private lateinit var navigationView: NavigationView
+    private lateinit var pics : ArrayList<Picture>
 
 
     private val navController by lazy {
@@ -48,6 +53,9 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        pics = getPics()
+
 
         auth = FirebaseAuth.getInstance()
         drawerLayout = findViewById(R.id.nav_drawer)
@@ -66,11 +74,13 @@ class HomeActivity : AppCompatActivity() {
             finishAffinity()
         }
 
+        if(Utils.isUserPresent(this))
+        header.user_name_nav.text = Utils.getUser(this).name
+        else header.user_name_nav.text = "Username"
 
         header.view_profile_button.setOnClickListener {
             if(Utils.isUserPresent(this)){
-                val action = HomeFragmentDirections.actionHomeFragmentToProfileFragment()
-                navController.navigate(action)
+                navController.navigate(R.id.profileFragment)
                 drawerLayout.closeDrawer(GravityCompat.START)
 
             }else {
@@ -130,57 +140,48 @@ class HomeActivity : AppCompatActivity() {
     }
 
     override fun onAttachFragment(fragment: Fragment) {
-        Log.d(TAG,"ON ATTACH CALLED")
-        super.onAttachFragment(fragment)
-        if (fragment is GalleryFragment) {
-            fragment.injectGallery(
-                GalleryDroid(
-                    listOf(
-                        Picture(
-                            fileURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/g1",
-                            fileThumbURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/g1",
-                        ),
-                        Picture(
-                            fileURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/g2",
-                            fileThumbURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/g2",
-                        ),
-                        Picture(
-                            fileURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h1",
-                            fileThumbURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h1",
-                        ),
-                        Picture(
-                            fileURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h2",
-                            fileThumbURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h2",
-                        ), Picture(
-                            fileURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h3",
-                            fileThumbURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h3",
-                        ), Picture(
-                            fileURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h4",
-                            fileThumbURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h4",
-                        ),
-                        Picture(
-                            fileURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h5",
-                            fileThumbURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h5",
-                        ),
-                        Picture(
-                            fileURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h6",
-                            fileThumbURL = "android.resource://com.lnct.bhopal.ac.in.idealab/drawable/h6",
-                        )
+            Log.d(TAG,"ON ATTACH CALLED")
+            super.onAttachFragment(fragment)
+            if (fragment is GalleryFragment) {
+                fragment.injectGallery(
+                    GalleryDroid(
+                      pics
                     )
+                        .layoutManager(GalleryDroid.LAYOUT_STAGGERED_GRID)
+                        .pictureCornerRadius(16f)
+                        .pictureElevation(8f)
+                        .transformer(GalleryDroid.TRANSFORMER_CUBE_OUT)
+                        .spacing(12)
+                        .portraitColumns(2)
+                        .landscapeColumns(3)
+                        .autoClickHandler(true)
+                        .useLabels(false)
                 )
-                    .layoutManager(GalleryDroid.LAYOUT_STAGGERED_GRID)
-                    .pictureCornerRadius(16f)
-                    .pictureElevation(8f)
-                    .transformer(GalleryDroid.TRANSFORMER_CUBE_OUT)
-                    .spacing(12)
-                    .portraitColumns(1)
-                    .landscapeColumns(1)
-                    .autoClickHandler(true)
-                    .useLabels(false)
-            )
-        }
+            }
+
+    }
+
+    fun getPics() : ArrayList<Picture> {
+        val pics = ArrayList<Picture>()
+        db.collection("highlights").get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    for (document in task.result) {
+                       val url = document.get("url").toString()
+                        Log.d(TAG,"IMAG URL ->" + url)
+                        val pic = Picture(
+                            fileURL = url,
+                            fileThumbURL = url
+                        )
+                        pics.add(pic)
 
 
+                    }
+                }
+            }
+
+        Log.d(TAG,"PICS END")
+        return  pics
     }
 
 }
