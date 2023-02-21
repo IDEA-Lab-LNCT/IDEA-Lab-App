@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.lnct.ac.`in`.idealab.Models.User
@@ -53,6 +54,12 @@ class ProfileFragment : Fragment() {
         mView.user_name_profile.text = "Hi! "+user.name
 
         mView.evGitHub.setText(user.github)
+
+
+        mView.skills_button.setOnClickListener {
+            val action = ProfileFragmentDirections.actionProfileFragmentToSkillsFragment()
+            findNavController().navigate(action)
+        }
 
         mView.profile_update_button.setOnClickListener {
             val whatsapp = mView.evPhNo.text.toString().trim()

@@ -62,7 +62,20 @@
         android:id="@+id/profileFragment"
         android:name="com.lnct.bhopal.ac.in.idealab.frgments.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_skillsFragment"
+            app:destination="@id/skillsFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/skillsFragment"
+        android:name="com.lnct.bhopal.ac.in.idealab.frgments.SkillsFragment"
+        android:label="fragment_skills"
+        tools:layout="@layout/fragment_skills" >
+        <action
+            android:id="@+id/action_skillsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </dialog>
     <fragment
         android:id="@+id/fullscreenEventFragment"
         android:name="com.lnct.bhopal.ac.in.idealab.frgments.FullscreenEventFragment"
