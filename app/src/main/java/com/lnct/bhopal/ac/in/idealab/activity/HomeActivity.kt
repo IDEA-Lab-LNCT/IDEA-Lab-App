@@ -3,9 +3,7 @@ package com.lnct.bhopal.ac.`in`.idealab.activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
-import android.nfc.Tag
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -28,8 +26,6 @@ import com.lnct.bhopal.ac.`in`.idealab.Constants.idealab_website
 import com.lnct.bhopal.ac.`in`.idealab.R
 import com.lnct.bhopal.ac.`in`.idealab.Utils
 import com.lnct.bhopal.ac.`in`.idealab.auth.LoginActivity
-import com.lnct.bhopal.ac.`in`.idealab.frgments.EventDirections
-import com.lnct.bhopal.ac.`in`.idealab.frgments.HomeFragmentDirections
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.nav_header.view.*
 
@@ -68,12 +64,18 @@ class HomeActivity : AppCompatActivity() {
         setupDrawer()
 
         val header = navigationView.getHeaderView(0)
-
-        button_logout.setOnClickListener{
+        
+        user_logout.setOnClickListener {
+            Utils.deleteUser(this)
             FirebaseAuth.getInstance().signOut()
-            startActivity(Intent(this, LoginActivity::class.java))
+            startActivity(Intent(this,LoginActivity::class.java))
+            finish()
             finishAffinity()
+
+
         }
+
+
 
         if(Utils.isUserPresent(this))
         header.user_name_nav.text = Utils.getUser(this).name
