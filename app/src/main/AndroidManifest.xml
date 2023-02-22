@@ -26,6 +26,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name="com.lnct.bhopal.ac.in.idealab.quiz.AssesmentDescriptionActivity"
             android:exported="false">

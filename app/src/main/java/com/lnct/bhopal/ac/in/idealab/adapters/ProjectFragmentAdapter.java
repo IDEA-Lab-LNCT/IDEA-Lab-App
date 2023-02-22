@@ -1,5 +1,6 @@
 package com.lnct.bhopal.ac.in.idealab.adapters;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,27 +48,39 @@ public class ProjectFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 //        TODO uncomment these lines
         holder.title_text.setText(list.get(position).getTitle());
         holder.desc_text.setText(list.get(position).getDesc());
-        if(list.get(position).getLiveLink() != null && list.get(position).getLiveLink().trim().length() != 0) {
+        if(list.get(position).getGithubLink() != null && list.get(position).getGithubLink().trim().length() != 0) {
             holder.link_view.setVisibility(View.VISIBLE);
             holder.link_view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i = new Intent();
-                    i.setAction(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(list.get(hold.getAbsoluteAdapterPosition()).getLiveLink().trim()));
-                    c.startActivity(i);
+
+                    try {
+                        Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(list.get(hold.getAbsoluteAdapterPosition()).getGithubLink().trim()));
+                        c.startActivity(myIntent);
+                    } catch (ActivityNotFoundException e) {
+                        Toast.makeText(c, "Invalid Link"
+                            ,  Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
+
+//
                 }
             });
         }
-        if(list.get(position).getGithubLink() != null && list.get(position).getGithubLink().trim().length() != 0) {
+        if(list.get(position).getLiveLink() != null && list.get(position).getLiveLink().trim().length() != 0) {
             holder.link_code.setVisibility(View.VISIBLE);
             holder.link_code.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i = new Intent();
-                    i.setAction(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(list.get(hold.getAbsoluteAdapterPosition()).getLiveLink().trim()));
-                    c.startActivity(i);
+
+                    try {
+                        Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(list.get(hold.getAbsoluteAdapterPosition()).getLiveLink().trim()));
+                        c.startActivity(myIntent);
+                    } catch (ActivityNotFoundException e) {
+                        Toast.makeText(c, "Invalid Link"
+                                ,  Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
                 }
             });
         }

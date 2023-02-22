@@ -71,7 +71,6 @@ public class FullScreenEvent extends AppCompatActivity {
         title = findViewById(R.id.event_titleholder);
         date = findViewById(R.id.event_dateholder);
         desc = findViewById(R.id.event_descholder);
-        back = findViewById(R.id.backbtn);
         btn = findViewById(R.id.registerbtn);
 
         Glide.with(this)
