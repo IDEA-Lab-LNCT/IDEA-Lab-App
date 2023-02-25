@@ -38,13 +38,14 @@
                 android:id="@+id/linearLayout3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
                 android:gravity="bottom"
                 android:orientation="vertical"
-                android:layout_marginTop="20sp"
-                android:layout_marginStart="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/event_image"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.38">
 
                 <TextView
                     android:id="@+id/event_title"
@@ -52,10 +53,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10sp"
                     android:ellipsize="marquee"
-                    android:maxLines="1"
+                    android:maxLines="3"
                     android:text="No events"
                     android:textColor="@color/blue"
-                    android:textSize="22sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView

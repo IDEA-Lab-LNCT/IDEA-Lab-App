@@ -12,7 +12,8 @@ class User(val name : String,
            var enrollment : String,
            var address: String,
            var sem : Int,
-           var github : String
+           var github : String,
+           var skills : ArrayList<String>
 ) {
 
 

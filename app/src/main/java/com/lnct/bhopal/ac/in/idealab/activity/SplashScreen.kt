@@ -38,7 +38,7 @@ class SplashScreen : AppCompatActivity() {
                 finish()
                 startActivity(Intent(this@SplashScreen, HomeActivity::class.java))}
 
-        },2500
+        },2100
 
         )
 

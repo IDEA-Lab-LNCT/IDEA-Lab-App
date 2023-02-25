@@ -21,4 +21,15 @@
     <color name="colorAccent">#FEE60A</color>
     <color name="colorBase">#F2B30F</color>
     <color name="colorOrangeBaseDark">#E84C02</color>
+
+
+    //Custom chip colors
+    <color name="lightGray">#F9F9F9</color>
+    <color name="colorPrimary">#911F27</color>
+    <color name="darkGray">#4B4B4B</color>
+
+    <color name="checkedChipBgColor">#206200EA</color>
+    <color name="chipBgColor">@color/lightGray</color>
+    <color name="checkedChipTextColor">@color/colorPrimary</color>
+    <color name="chipTextColor">@color/darkGray</color>
 </resources>

@@ -160,10 +160,14 @@ class LoginActivity : AppCompatActivity(){
                                 val uAddr = user.get("address").toString()
                                 val uSem = user.get("semester").toString()
                                 val github = user.get("github").toString()
+                                val skills = user.get("skills")
+
                                 val uId = user.id
 
-                                Log.d(TAG,"USER ID :---> "+uId)
-                                val userObj = User(uName,uEmail,uBranch,uCollege,uWhatsApp,uId,uDOB,uEnroll,uAddr,uSem.toInt(),github)
+                                Log.d(TAG,"USER Skills  :---> "+skills.toString())
+                                val userObj = User(uName,uEmail,uBranch,uCollege,uWhatsApp,uId,uDOB,uEnroll,uAddr,uSem.toInt(),github,
+                                    skills as ArrayList<String>
+                                )
                                 Utils.saveUser(this,userObj)
 
                                 Toast.makeText(this, "Welcome! "+u.toString(), Toast.LENGTH_SHORT).show()

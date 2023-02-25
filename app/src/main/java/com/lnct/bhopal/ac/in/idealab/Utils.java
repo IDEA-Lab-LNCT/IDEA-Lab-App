@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -86,12 +87,10 @@ public class Utils {
     }
 
     public static void saveUser(Context context , User u){
-        SharedPreferences.Editor editor = context.getSharedPreferences("data", Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = getPrefsEditor(context);
         String userObj = gson.toJson(u);
         editor.putString("USER",userObj);
-        editor.commit();
-
-
+        editor.apply();
     }
 
     public static User getUser(Context context){
@@ -110,7 +109,10 @@ public class Utils {
     }
 
     public static void deleteUser(Context c){
-        getPrefsEditor(c).remove("USER");
+        SharedPreferences.Editor editor = getPrefsEditor(c);
+        Toast.makeText(c,"Logout 👍",Toast.LENGTH_SHORT).show();
+        editor.remove("USER");
+        editor.commit();
     }
 
 }
