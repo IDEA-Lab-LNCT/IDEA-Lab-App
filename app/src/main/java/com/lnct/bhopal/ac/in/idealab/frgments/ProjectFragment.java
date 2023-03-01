@@ -139,7 +139,8 @@ public class ProjectFragment extends Fragment {
         refresh_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.homeFragment);
+                Navigation.findNavController(view).popBackStack();
+                Navigation.findNavController(view).navigate(R.id.projectFragment);
             }
         });
 

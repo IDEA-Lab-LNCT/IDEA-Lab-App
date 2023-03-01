@@ -110,7 +110,6 @@ public class Utils {
 
     public static void deleteUser(Context c){
         SharedPreferences.Editor editor = getPrefsEditor(c);
-        Toast.makeText(c,"Logout 👍",Toast.LENGTH_SHORT).show();
         editor.remove("USER");
         editor.commit();
     }

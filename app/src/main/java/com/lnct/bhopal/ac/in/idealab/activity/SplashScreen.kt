@@ -38,14 +38,14 @@ class SplashScreen : AppCompatActivity() {
                 finish()
                 startActivity(Intent(this@SplashScreen, HomeActivity::class.java))}
 
-        },2100
+        },1700
 
         )
 
         val anim = AnimationUtils.loadAnimation(this, R.anim.fade_scale)
         icon_holder.startAnimation(anim)
-        logoImg.startAnimation(anim)
-        tv2.startAnimation(anim)
+//        logoImg.startAnimation(anim)
+//        tv2.startAnimation(anim)
 
         Utils.createImageCacheDir(this)
 

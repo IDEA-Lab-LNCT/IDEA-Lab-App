@@ -209,7 +209,8 @@ public class FullscreenEventFragment extends Fragment {
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()) {
                     Toast.makeText(getContext(), "Event registration sucessful", Toast.LENGTH_SHORT).show();
-                    Navigation.findNavController(v).navigate(R.id.event2);
+//                    Navigation.findNavController(v).navigate(R.id.event2);
+                    Navigation.findNavController(v).popBackStack();
                 }
                 else Toast.makeText(getContext(), "Some error occured", Toast.LENGTH_SHORT).show();
                 if(dialog.isShowing()) dialog.dismiss();
