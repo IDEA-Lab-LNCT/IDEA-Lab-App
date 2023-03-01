@@ -303,6 +303,7 @@ public class HomeFragment extends Fragment {
         refresh_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Navigation.findNavController(view).popBackStack();
                 Navigation.findNavController(view).navigate(R.id.homeFragment);
             }
         });
