@@ -77,10 +77,13 @@ public class ContactUs extends Fragment {
         mailus = contactus_view.findViewById(R.id.mailuslink);
 
         lnctlink.setOnClickListener(view -> {
-            String url = "https://play.google.com/store/apps/details?id=com.lnct_bhopal.ac.in.idealab";
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse(url));
-            startActivity(i);
+            String url = "https://play.google.com/store/apps/details?id=com.lnct.bhopal.ac.in.idealab";
+            Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+            String shareBody = "Get the AICTE IDEA Lab, LNCT app from google playstore\n\nhttps://play.google.com/store/apps/details?id=com.lnct.bhopal.ac.in.idealab";
+            intent.setType("text/plain");
+            intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "AICTE IDEA Lab LNCT");
+            intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+            startActivity(Intent.createChooser(intent, "Select an app to move with"));
         });
 
         mailus.setOnClickListener(view -> {
@@ -89,6 +92,20 @@ public class ContactUs extends Fragment {
 //
             Intent emailIntent = new Intent(Intent.ACTION_SENDTO, uri);
             startActivity(Intent.createChooser(emailIntent," Select an app to move with"));
+        });
+
+        contactus_view.findViewById(R.id.instagram).setOnClickListener(v -> {
+            String url = "https://www.instagram.com/idealablnctbhopal/";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
+        });
+
+        contactus_view.findViewById(R.id.linkedin).setOnClickListener(v -> {
+            String url = "https://www.linkedin.com/company/aicte-idea-lab-lnct-bhopal/";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
         });
 
         return contactus_view;

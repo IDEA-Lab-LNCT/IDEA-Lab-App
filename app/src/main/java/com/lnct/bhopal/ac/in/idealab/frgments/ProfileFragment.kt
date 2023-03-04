@@ -96,7 +96,7 @@ class ProfileFragment : Fragment() {
                         Utils.deleteUser(requireContext())
                         Utils.saveUser(requireContext(),user)
 
-                        Toast.makeText(requireContext(), "Details updated 👍", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Details updated", Toast.LENGTH_SHORT).show()
                         mView.profile_update_button.isEnabled = true
                         mView.loading.visibility = View.GONE
                     }else {

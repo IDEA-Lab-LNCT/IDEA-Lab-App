@@ -81,7 +81,7 @@ class HomeActivity : AppCompatActivity() {
         header.user_name_nav.text = Utils.getUser(this).name
         else header.user_name_nav.text = "Username"
 
-        header.view_profile_button.setOnClickListener {
+        header.setOnClickListener {
             if(Utils.isUserPresent(this)){
 
                 navController.navigate(R.id.profileFragment)

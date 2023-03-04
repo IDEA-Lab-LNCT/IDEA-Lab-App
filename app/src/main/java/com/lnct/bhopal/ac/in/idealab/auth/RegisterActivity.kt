@@ -110,7 +110,7 @@ class RegisterActivity : AppCompatActivity(){
                             val userObj = User(name,email,branch,college,phone,intent.getStringExtra("PHONE")!!,dob,enrollment,address,sem.toInt(),"Link not set",skills)
                             Utils.saveUser(this@RegisterActivity,userObj)
 
-                            Toast.makeText(this@RegisterActivity, "Registration Complete 👍", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@RegisterActivity, "Registration Complete", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this@RegisterActivity, HomeActivity::class.java))
                             finishAffinity()
                         }
