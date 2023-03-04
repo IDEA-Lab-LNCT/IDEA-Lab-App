@@ -90,7 +90,7 @@ class SkillsFragment : BottomSheetDialogFragment(){
                     user.skills = newList
                     Utils.deleteUser(requireContext())
                     Utils.saveUser(requireContext(),user)
-                    Toast.makeText(requireContext(), "Skills updated 👍", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Skills updated", Toast.LENGTH_SHORT).show()
                     mView.apply_skills.isEnabled = true
                     mView.loading_skills.visibility = View.GONE
                 }else {

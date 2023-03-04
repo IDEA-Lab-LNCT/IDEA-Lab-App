@@ -82,11 +82,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20sp"
-            app:layout_goneMarginTop="10sp"
-            app:cardElevation="10sp"
-            app:cardCornerRadius="20sp"
             android:layout_marginTop="-20sp"
-            app:layout_constraintTop_toBottomOf="@id/image_cardview">
+            app:cardCornerRadius="20sp"
+            app:cardElevation="5sp"
+            android:layout_marginBottom="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_cardview"
+            app:layout_goneMarginTop="10sp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -119,10 +121,10 @@
                     android:textSize="18sp" />
 
 
-<!--                <View-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="500sp"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/event_descholder"/>-->
+                <!--                <View-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="500sp"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@+id/event_descholder"/>-->
 
             </LinearLayout>
 
