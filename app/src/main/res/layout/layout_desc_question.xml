@@ -26,56 +26,67 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="126dp"
-                android:layout_height="122dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="6dp"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/cloud3png" />
+                app:layout_constraintTop_toBottomOf="@+id/qtv" />
 
             <TextView
                 android:id="@+id/qtv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10sp"
                 android:text="This field contains the question to be asked"
                 android:textAlignment="center"
                 android:textColor="@color/dark_blue"
                 android:textSize="23sp"
                 android:textStyle="bold"
-                android:layout_marginHorizontal="10sp"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="10dp" />
 
             <LinearLayout
+                android:id="@+id/linearLayout5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toTopOf="@+id/save_btn"
-                app:layout_constraintTop_toBottomOf="@+id/qtv">
+                app:layout_constraintBottom_toTopOf="@+id/save_btn">
 
-                <EditText
-                    android:id="@+id/aet"
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="5sp"
-                    android:layout_marginVertical="20sp"
-                    android:background="#DFE6E8"
-                    android:hint="Your response"
-                    android:paddingHorizontal="10sp"
-                    android:paddingVertical="25sp"
-                    android:text=""
-                    android:textColor="@color/gray"
-                    app:layout_constraintBottom_toTopOf="@+id/save_btn"
-                    app:layout_constraintTop_toBottomOf="@+id/qtv"
-                    app:layout_constraintVertical_bias="0.19999999"
-                    tools:layout_editor_absoluteX="13dp" />
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/aet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="5sp"
+                        android:layout_marginVertical="20sp"
+                        android:background="#DFE6E8"
+                        android:hint="Your response"
+                        android:maxLines="5"
+                        android:minHeight="100sp"
+                        android:paddingHorizontal="10sp"
+                        android:paddingVertical="10sp"
+                        android:text=""
+                        android:textColor="@color/gray"
+                        app:layout_constraintBottom_toTopOf="@+id/save_btn"
+                        app:layout_constraintTop_toBottomOf="@+id/qtv"
+                        app:layout_constraintVertical_bias="0.19999999"
+                        tools:layout_editor_absoluteX="13dp" />
+
+                </ScrollView>
 
                 <RadioGroup
                     android:id="@+id/rg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10sp"
-                    android:padding="20sp"
                     android:background="#DEE5E7"
+                    android:layout_marginBottom="5sp"
+                    android:padding="20sp"
                     app:layout_constraintBottom_toTopOf="@+id/save_btn" />
 
             </LinearLayout>

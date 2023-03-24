@@ -110,18 +110,18 @@ public class AssesmentActivity extends AppCompatActivity {
         opt.add("option 1qwertyuioplkjhgfdsazxcvbnm");
         opt.add("option 2");
         opt.add("option 3");
-        QuestionModel q1 = new QuestionModel("This is Question number 1", false, null);
-        QuestionModel q2 = new QuestionModel("This is Question number 2", true, opt);
-
-
-        model_list = new ArrayList<>();
-        model_list.add(q1);
-        model_list.add(q2);
-        model_list.add(q1);
-        model_list.add(q2);
-        model_list.add(q1);
-        model_list.add(q2);
-        model_list.add(q1);
+//        QuestionModel q1 = new QuestionModel("This is Question number 1", false, null);
+//        QuestionModel q2 = new QuestionModel("This is Question number 2", true, opt);
+//
+//
+//        model_list = new ArrayList<>();
+//        model_list.add(q1);
+//        model_list.add(q2);
+//        model_list.add(q1);
+//        model_list.add(q2);
+//        model_list.add(q1);
+//        model_list.add(q2);
+//        model_list.add(q1);
 //        model_list.add(q2);
 //        model_list.add(q1);
 //        model_list.add(q2);

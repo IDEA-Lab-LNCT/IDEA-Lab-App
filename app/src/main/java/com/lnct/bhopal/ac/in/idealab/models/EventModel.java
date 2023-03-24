@@ -23,8 +23,10 @@ public class EventModel implements Serializable {
     private boolean past_event;
     ArrayList<String> id_list;
     private JSONArray ids;
+    private boolean has_question;
+    private boolean can_register;
 
-    public EventModel(String id, String image_uri, String title, String start_date, String desc, String end_date, String last_reg_date, boolean past_event, ArrayList<String> id_list) {
+    public EventModel(String id, String image_uri, String title, String start_date, String desc, String end_date, String last_reg_date, boolean past_event, ArrayList<String> id_list, boolean has_question, boolean can_register) {
         this.id = id;
         this.image_uri = image_uri;
         this.title = title;
@@ -34,6 +36,8 @@ public class EventModel implements Serializable {
         this.last_reg_date = last_reg_date;
         this.past_event = past_event;
         this.id_list = id_list;
+        this.has_question = has_question;
+        this.can_register = can_register;
     }
 
     public EventModel(String id, String image_uri, String title, String start_date, String desc, String end_date, boolean past_event, JSONArray ids) {
@@ -80,6 +84,10 @@ public class EventModel implements Serializable {
         return ids;
     }
 
+    public boolean isHas_question() {
+        return has_question;
+    }
+
     public static EventModel objToEventModel(JSONObject obj) throws JSONException {
 
 
@@ -103,6 +111,10 @@ public class EventModel implements Serializable {
         return id_list;
     }
 
+    public boolean can_register() {
+        return can_register;
+    }
+
     public static EventModel objToEventModel(QueryDocumentSnapshot document) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -113,9 +125,11 @@ public class EventModel implements Serializable {
         String end_date = sdf2.format(document.getDate("end_date"));
 
         String cur = sdf.format(Calendar.getInstance().getTime());
-        boolean past_event1 = last_reg_date.compareTo(cur)>=0?false:true;
+        boolean past_event1 = start_date.compareTo(cur)>=0?false:true;
+        boolean can_register1 = last_reg_date.compareTo(cur)>=0?true:false;
+        boolean has_questions = document.get("questions") != null?true:false;
 
-        EventModel model = new EventModel(document.getId(), document.getString("image_url"), document.getString("title"), start_date, document.getString("desc"), end_date, last_reg_date, past_event1, (ArrayList<String>) document.get("ids"));
+        EventModel model = new EventModel(document.getId(), document.getString("image_url"), document.getString("title"), start_date, document.getString("desc"), end_date, last_reg_date, past_event1, (ArrayList<String>) document.get("ids"), has_questions, can_register1);
 
         return model;
     }

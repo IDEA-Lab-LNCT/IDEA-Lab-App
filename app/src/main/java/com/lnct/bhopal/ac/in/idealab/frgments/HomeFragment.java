@@ -331,12 +331,15 @@ public class HomeFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-
                                 EventModel model = EventModel.objToEventModel(document);
                                 if(!model.isPast_event()) list_event.add(model);
-
-                                event_adapter.notifyDataSetChanged();
                             }
+                            event_adapter.notifyDataSetChanged();
+                            StringBuilder sb = new StringBuilder("| ");
+                            for(int i=1; i<list_event.size(); i++) {
+                                sb.append("• ");
+                            }
+                            pos_tv.setText(sb);
                         }
                     }
                 });
