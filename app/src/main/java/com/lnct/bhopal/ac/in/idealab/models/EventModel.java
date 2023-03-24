@@ -121,8 +121,8 @@ public class EventModel implements Serializable {
         SimpleDateFormat sdf2 = new SimpleDateFormat("dd-MM-yyyy");
 
         String last_reg_date = sdf.format(document.getDate("last_reg_date"));
-        String start_date = sdf2.format(document.getDate("start_date"));
-        String end_date = sdf2.format(document.getDate("end_date"));
+        String start_date = sdf.format(document.getDate("start_date"));
+        String end_date = sdf.format(document.getDate("end_date"));
 
         String cur = sdf.format(Calendar.getInstance().getTime());
         boolean past_event1 = start_date.compareTo(cur)>=0?false:true;
