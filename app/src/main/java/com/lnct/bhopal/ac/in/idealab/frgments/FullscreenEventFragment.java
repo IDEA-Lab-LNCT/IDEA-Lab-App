@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.lnct.bhopal.ac.in.idealab.R;
@@ -133,7 +134,7 @@ public class FullscreenEventFragment extends Fragment {
                 .error(R.drawable.app_logo)
                 .into(event_image);
 
-        if(model.isPast_event()) btn.setVisibility(View.GONE);
+        if(model.isPast_event() || !model.can_register()) btn.setVisibility(View.GONE);
 
         if(Utils.isUserPresent(getContext())) {
             user_available = true;
@@ -187,13 +188,22 @@ public class FullscreenEventFragment extends Fragment {
 
         cont_btn.setOnClickListener(vw -> {
 //            TODO: add navgraph for quiz activity
-            ArrayList<String> lst = model.getId_list();
-            lst.add(Utils.getUser(getContext()).get_id());
-            update(lst, view);
-            cont_btn.setText("Please wait");
-            cont_btn.setClickable(false);
-            edit_btn.setClickable(false);
-            dialog.setCancelable(false);
+
+//            Bundle bundle = new Bundle();
+//            bundle.putString("event_id", model.getId());
+            if(model.isHas_question()) {
+                Navigation.findNavController(view).navigate(R.id.quizWelcomeFragment, bundle);
+                dialog.dismiss();
+            }
+            else {
+                ArrayList<String> lst = model.getId_list();
+                lst.add(Utils.getUser(getContext()).get_id());
+                update(lst, view);
+                cont_btn.setText("Please wait");
+                cont_btn.setClickable(false);
+                edit_btn.setClickable(false);
+                dialog.setCancelable(false);
+            }
         });
 
         title.setText(title_);

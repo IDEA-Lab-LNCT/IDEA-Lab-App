@@ -87,5 +87,27 @@
         <action
             android:id="@+id/action_fullscreenEventFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_fullscreenEventFragment_to_quizWelcomeFragment"
+            app:destination="@id/quizWelcomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizWelcomeFragment"
+        android:name="com.lnct.bhopal.ac.in.idealab.quiz.QuizWelcomeFragment"
+        tools:layout="@layout/fragment_quiz_welcome">
+        <action
+            android:id="@+id/action_quizWelcomeFragment_to_assesmentFrgment"
+            app:destination="@id/assesmentFrgment" />
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/assesmentFrgment"
+        android:name="com.lnct.bhopal.ac.in.idealab.frgments.AssesmentFrgment"
+        tools:layout="@layout/fragment_assesment_frgment">
+        <argument
+            android:name="id"
+            app:argType="string" />
     </fragment>
 </navigation>

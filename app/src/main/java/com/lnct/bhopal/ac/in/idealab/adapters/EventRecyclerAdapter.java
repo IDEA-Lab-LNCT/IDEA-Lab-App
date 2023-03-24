@@ -89,9 +89,10 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
             });
 
             //TODO set image in image view and uncomment these lines
-            holder.event_date.setText("Start Date: " + event_list.get(position).getStart_date());
+            holder.event_date.setText("Start Date: " + event_list.get(position).getStart_date() +
+                    "\nEnd Date: " + event_list.get(position).getEnd_date());
             holder.event_title.setText(event_list.get(position).getTitle());
-            if (event_list.get(position).isPast_event()) holder.event_register.setVisibility(View.GONE);
+            if (event_list.get(position).isPast_event() || !event_list.get(position).can_register()) holder.event_register.setVisibility(View.GONE);
             else holder.event_register.setVisibility(View.VISIBLE);
             Glide.with(c)
                     .load(Uri.parse(event_list.get(position).getImage_uri()))

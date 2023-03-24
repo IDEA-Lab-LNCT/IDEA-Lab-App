@@ -75,8 +75,6 @@ class HomeActivity : AppCompatActivity() {
 
         }
 
-
-
         if(Utils.isUserPresent(this))
         header.user_name_nav.text = Utils.getUser(this).name
         else header.user_name_nav.text = "Username"
