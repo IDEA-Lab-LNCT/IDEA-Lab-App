@@ -196,13 +196,16 @@ public class FullscreenEventFragment extends Fragment {
                 dialog.dismiss();
             }
             else {
-                ArrayList<String> lst = model.getId_list();
-                lst.add(Utils.getUser(getContext()).get_id());
-                update(lst, view);
-                cont_btn.setText("Please wait");
-                cont_btn.setClickable(false);
-                edit_btn.setClickable(false);
-                dialog.setCancelable(false);
+                if(!Utils.isNetworkAvailable(getContext())) Toast.makeText(getContext(), "No network available", Toast.LENGTH_SHORT).show();
+                else {
+                    ArrayList<String> lst = model.getId_list();
+                    lst.add(Utils.getUser(getContext()).get_id());
+                    update(lst, view);
+                    cont_btn.setText("Please wait");
+                    cont_btn.setClickable(false);
+                    edit_btn.setClickable(false);
+                    dialog.setCancelable(false);
+                }
             }
         });
 

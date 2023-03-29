@@ -233,7 +233,7 @@ public class AssesmentFrgment extends Fragment {
             aet.setText("");
         }
 
-        qtv.setText(model_list.get(i).getQ());
+        qtv.setText("Q" + (i+1) + ". " + model_list.get(i).getQ());
     }
 
     public void update(View v) {

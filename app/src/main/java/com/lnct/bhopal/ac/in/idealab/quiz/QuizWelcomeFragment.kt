@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation.findNavController
@@ -20,6 +21,7 @@ import com.lnct.bhopal.ac.`in`.idealab.models.QuestionModel
 class QuizWelcomeFragment : Fragment() {
 
     lateinit var btnStartQuiz: Button
+    lateinit var ruletv: TextView
     var event_id: String = "xyz"
     var db: FirebaseFirestore? = null
     val list: ArrayList<QuestionModel> = ArrayList<QuestionModel>()
@@ -44,6 +46,7 @@ class QuizWelcomeFragment : Fragment() {
         event_id = (bundle!!.getSerializable("event") as EventModel?)?.getId() ?: ""
 
         btnStartQuiz = view.findViewById(R.id.btnStartQuiz)
+        ruletv = view.findViewById(R.id.ruletv)
         btnStartQuiz.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
 
@@ -87,6 +90,10 @@ class QuizWelcomeFragment : Fragment() {
                             list.add(QuestionModel(mp["question"], false, null, mp["qImage"], mp["id"]))
                         }
                     }
+                    val sb = StringBuilder()
+                    sb.append("This test contains " + list.size + " questions\n\n")
+                    sb.append(ruletv.text)
+                    ruletv.setText(sb)
                     ready = true
                     Toast.makeText(context, "You can now start the test", Toast.LENGTH_SHORT).show()
                     btnStartQuiz.setText("Start Test")

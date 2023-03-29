@@ -278,8 +278,8 @@ public class HomeFragment extends Fragment {
                 StringBuilder sb = new StringBuilder();
                 cur_pos_gallery = gallery_manager.findLastCompletelyVisibleItemPosition();
                 for(int i=0; i<gallery_manager.getItemCount(); i++) {
-                    if(i != cur_pos_gallery) sb.append("• ");
-                    else sb.append("| ");
+                    if(i != cur_pos_gallery) sb.append("◦ ");
+                    else sb.append("● ");
                 }
                 pos_tv_gallery.setText(sb.toString().trim());
             }
@@ -293,7 +293,7 @@ public class HomeFragment extends Fragment {
                 cur_pos_event = event_manager.findLastCompletelyVisibleItemPosition();
                 for(int i=0; i<event_manager.getItemCount(); i++) {
                     if(i != cur_pos_event) sb.append("• ");
-                    else sb.append("| ");
+                    else sb.append("● ");
                 }
                 pos_tv.setText(sb.toString().trim());
             }
@@ -335,9 +335,9 @@ public class HomeFragment extends Fragment {
                                 if(!model.isPast_event()) list_event.add(model);
                             }
                             event_adapter.notifyDataSetChanged();
-                            StringBuilder sb = new StringBuilder("| ");
+                            StringBuilder sb = new StringBuilder("● ");
                             for(int i=1; i<list_event.size(); i++) {
-                                sb.append("• ");
+                                sb.append("◦ ");
                             }
                             pos_tv.setText(sb);
                         }
